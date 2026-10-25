@@ -1,0 +1,29 @@
+// Prisma schema for 20-cloud-observability-os
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Microservice {
+  id        String      @id @default(cuid())
+  name      String      @unique
+  status    String      @default("healthy")
+  traces    TraceSpan[]
+  createdAt DateTime    @default(now())
+}
+
+model TraceSpan {
+  id         String       @id @default(cuid())
+  serviceId  String
+  service    Microservice @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  traceId    String
+  name       String
+  durationMs Float
+  timestamp  DateTime     @default(now())
+
+  @@index([traceId])
+}

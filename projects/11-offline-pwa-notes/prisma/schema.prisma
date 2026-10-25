@@ -1,0 +1,18 @@
+// Prisma schema for 11-offline-pwa-notes
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model OfflineNote {
+  id         String   @id @default(cuid())
+  title      String
+  content    String
+  version    Int      @default(1)
+  updatedAt  DateTime @updatedAt
+  createdAt  DateTime @default(now())
+}

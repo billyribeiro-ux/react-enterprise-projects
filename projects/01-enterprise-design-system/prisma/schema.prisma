@@ -1,0 +1,30 @@
+// Prisma schema for 01-enterprise-design-system
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model ComponentToken {
+  id          String   @id @default(cuid())
+  component   String   @unique
+  category    String   // 'typography' | 'color' | 'spacing' | 'elevation' | '3d-material'
+  cssVariable String
+  value       String
+  roughness   Float    @default(0.2)
+  metalness   Float    @default(0.8)
+  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now())
+}
+
+model DesignTokenAudit {
+  id         String   @id @default(cuid())
+  component  String
+  rulePassed Boolean  @default(true)
+  ruleName   String   // 'contrast-wcag-aaa' | 'touch-target-44px' | 'spatial-depth-ratio'
+  severity   String   @default("info")
+  createdAt  DateTime @default(now())
+}

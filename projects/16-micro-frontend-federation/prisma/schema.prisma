@@ -1,0 +1,18 @@
+// Prisma schema for 16-micro-frontend-federation
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model MicroAppRegistry {
+  id        String   @id @default(cuid())
+  appName   String   @unique
+  entryUrl  String
+  version   String
+  isActive  Boolean  @default(true)
+  updatedAt DateTime @updatedAt
+}

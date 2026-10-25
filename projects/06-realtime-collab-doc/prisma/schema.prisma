@@ -1,0 +1,25 @@
+// Prisma schema for 06-realtime-collab-doc
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model CollabDocument {
+  id        String        @id @default(cuid())
+  title     String
+  blocks    CollabBlock[]
+  createdAt DateTime      @default(now())
+}
+
+model CollabBlock {
+  id        String         @id @default(cuid())
+  docId     String
+  document  CollabDocument @relation(fields: [docId], references: [id], onDelete: Cascade)
+  content   String
+  lockedBy  String?
+  updatedAt DateTime       @updatedAt
+}

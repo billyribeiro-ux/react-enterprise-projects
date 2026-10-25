@@ -1,0 +1,30 @@
+{
+  "name": "react-enterprise-projects",
+  "version": "1.0.0",
+  "private": true,
+  "description": "20 Enterprise-grade full-stack projects built with React 19, Next.js App Router, TypeScript, Node.js 24 LTS, Prisma ORM, Vitest, Playwright, and Vite.",
+  "packageManager": "pnpm@12.14.0",
+  "engines": {
+    "node": ">=24.0.0",
+    "pnpm": ">=12.0.0"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "test:e2e": "turbo run test:e2e",
+    "lint": "turbo run lint",
+    "db:generate": "turbo run db:generate",
+    "db:push": "turbo run db:push",
+    "db:seed": "turbo run db:seed",
+    "portal:serve": "python3 -m http.server 4173",
+    "gh:check": "gh auth status",
+    "gh:create": "gh repo create billyribeiro-ux/react-enterprise-projects --public --source=. --remote=origin --push",
+    "gh:ci": "gh run list --limit 5",
+    "gh:pr": "gh pr create --fill"
+  },
+  "devDependencies": {
+    "turbo": "^2.4.0",
+    "typescript": "^5.8.0"
+  }
+}
