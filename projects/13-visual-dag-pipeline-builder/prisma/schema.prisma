@@ -1,0 +1,29 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model DagPipeline {
+  id              String          @id @default(cuid())
+  slug            String          @unique
+  name            String
+  edgesJson       String
+  updatedAt       DateTime        @updatedAt
+  deadLetterJobs  DeadLetterJob[]
+}
+
+model DeadLetterJob {
+  id          String      @id @default(cuid())
+  pipelineId  String
+  stageName   String
+  errorReason String
+  retryCount  Int         @default(0)
+  createdAt   DateTime    @default(now())
+  pipeline    DagPipeline @relation(fields: [pipelineId], references: [id], onDelete: Cascade)
+
+  @@index([pipelineId, createdAt])
+}

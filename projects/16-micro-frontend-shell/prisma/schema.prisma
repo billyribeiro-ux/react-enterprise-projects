@@ -1,0 +1,31 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model MicroAppManifest {
+  id            String                    @id @default(cuid())
+  remoteScope   String                    @unique
+  entryUrl      String
+  sriSha384     String
+  activeVersion String                    @default("2.4.0")
+  healthy       Boolean                   @default(true)
+  updatedAt     DateTime                  @updatedAt
+  deployments   RemoteDeploymentHistory[]
+}
+
+model RemoteDeploymentHistory {
+  id          String           @id @default(cuid())
+  manifestId  String
+  version     String
+  sriSha384   String
+  promotedBy  String           @default("release-bot")
+  createdAt   DateTime         @default(now())
+  manifest    MicroAppManifest @relation(fields: [manifestId], references: [id], onDelete: Cascade)
+
+  @@index([manifestId, createdAt])
+}

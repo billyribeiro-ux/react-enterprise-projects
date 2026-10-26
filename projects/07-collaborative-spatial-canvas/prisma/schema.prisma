@@ -1,0 +1,30 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model SpatialScene {
+  id        String        @id @default(cuid())
+  slug      String        @unique
+  title     String
+  nodes     SpatialNode[]
+}
+
+model SpatialNode {
+  id        String       @id @default(cuid())
+  sceneId   String
+  label     String
+  posX      Float        @default(0)
+  posY      Float        @default(0)
+  posZ      Float        @default(0)
+  lamportTs Int          @default(1)
+  peerId    String       @default("peer-alpha")
+  updatedAt DateTime     @updatedAt
+  scene     SpatialScene @relation(fields: [sceneId], references: [id], onDelete: Cascade)
+
+  @@index([sceneId, lamportTs])
+}

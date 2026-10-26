@@ -1,37 +1,28 @@
-// Prisma schema for 03-url-state-kanban
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
 generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
-}
-
-model KanbanBoard {
-  id        String         @id @default(cuid())
-  title     String
-  columns   KanbanColumn[]
-  createdAt DateTime       @default(now())
-}
-
-model KanbanColumn {
+model SprintBoard {
   id        String       @id @default(cuid())
-  boardId   String
-  board     KanbanBoard  @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  slug      String       @unique
   title     String
-  order     Int          @default(0)
   tasks     KanbanTask[]
-  createdAt DateTime     @default(now())
 }
 
 model KanbanTask {
-  id          String       @id @default(cuid())
-  columnId    String
-  column      KanbanColumn @relation(fields: [columnId], references: [id], onDelete: Cascade)
+  id          String      @id @default(cuid())
+  boardId     String
   title       String
-  priority    String       @default("high")
-  order       Int          @default(0)
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
+  status      String      // "BACKLOG" | "IN_PROGRESS" | "DONE"
+  orderRank   Float       @default(1000.0)
+  storyPoints Int         @default(3)
+  updatedAt   DateTime    @updatedAt
+  board       SprintBoard @relation(fields: [boardId], references: [id], onDelete: Cascade)
+
+  @@index([boardId, status, orderRank])
 }

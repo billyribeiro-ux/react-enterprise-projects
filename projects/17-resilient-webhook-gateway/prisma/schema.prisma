@@ -1,0 +1,28 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model WebhookEndpoint {
+  id               String            @id @default(cuid())
+  targetUrl        String            @unique
+  circuitState     String            @default("CLOSED") // "CLOSED" | "OPEN" | "HALF_OPEN"
+  consecutiveFails Int               @default(0)
+  updatedAt        DateTime          @updatedAt
+  deliveries       WebhookEventLog[]
+}
+
+model WebhookEventLog {
+  id         String          @id @default(cuid())
+  endpointId String
+  httpStatus Int
+  backoffMs  Int
+  createdAt  DateTime        @default(now())
+  endpoint   WebhookEndpoint @relation(fields: [endpointId], references: [id], onDelete: Cascade)
+
+  @@index([endpointId, createdAt])
+}

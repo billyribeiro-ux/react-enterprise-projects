@@ -1,42 +1,33 @@
-// Prisma schema for 02-saas-billing-dashboard
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
 generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+model TenantSubscription {
+  id         String            @id @default(cuid())
+  tenantSlug String            @unique
+  planTier   String            // "STARTER" | "GROWTH" | "ENTERPRISE"
+  seats      Int               @default(25)
+  mrrCents   Int               @default(249000)
+  nrrPercent Float             @default(134.8)
+  version    Int               @default(1)
+  updatedAt  DateTime          @updatedAt
+  invoices   InvoiceLineItem[]
+
+  @@index([planTier])
 }
 
-model Tenant {
-  id            String         @id @default(cuid())
-  name          String
-  slug          String         @unique
-  planTier      String         @default("enterprise")
-  mrrCents      Int            @default(4892100)
-  netRetention  Float          @default(138.4)
-  subscriptions Subscription[]
-  invoices      Invoice[]
-  createdAt     DateTime       @default(now())
-}
+model InvoiceLineItem {
+  id             String             @id @default(cuid())
+  subscriptionId String
+  description    String
+  amountCents    Int
+  createdAt      DateTime           @default(now())
+  subscription   TenantSubscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
 
-model Subscription {
-  id         String   @id @default(cuid())
-  tenantId   String
-  tenant     Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
-  status     String   @default("active")
-  priceCents Int
-  renewsAt   DateTime
-  createdAt  DateTime @default(now())
-}
-
-model Invoice {
-  id         String   @id @default(cuid())
-  tenantId   String
-  tenant     Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
-  amountDue  Int
-  amountPaid Int      @default(0)
-  status     String   @default("paid")
-  pdfUrl     String?
-  createdAt  DateTime @default(now())
+  @@index([subscriptionId, createdAt])
 }

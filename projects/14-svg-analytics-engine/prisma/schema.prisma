@@ -1,19 +1,26 @@
-// Prisma schema for 14-svg-analytics-engine
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
 generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+model MetricSeries {
+  id         String            @id @default(cuid())
+  seriesKey  String            @unique
+  unit       String            @default("pct")
+  datapoints MetricDatapoint[]
 }
 
-model MetricTimeSeries {
-  id        String   @id @default(cuid())
-  metric    String
-  timestamp DateTime
-  value     Float
-  createdAt DateTime @default(now())
+model MetricDatapoint {
+  id         String       @id @default(cuid())
+  seriesId   String
+  axisLabel  String
+  score      Float
+  recordedAt DateTime     @default(now())
+  series     MetricSeries @relation(fields: [seriesId], references: [id], onDelete: Cascade)
 
-  @@index([metric, timestamp])
+  @@index([seriesId, recordedAt])
 }

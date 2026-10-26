@@ -1,0 +1,19 @@
+@layer reset, tokens, components, utilities;
+
+@layer tokens {
+  :root {
+    --surface-950: oklch(0.14 0.02 255);
+    --surface-900: oklch(0.19 0.03 255);
+    --accent-cyan: oklch(0.76 0.14 230);
+    --accent-emerald: oklch(0.79 0.17 155);
+    --text-primary: oklch(0.98 0.01 255);
+    --text-muted: oklch(0.68 0.03 255);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,29 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model EncryptedVaultEnvelope {
+  id            String       @id @default(cuid())
+  label         String       @unique
+  ivHex         String
+  saltHex       String
+  kdfIterations Int          @default(310000)
+  createdAt     DateTime     @default(now())
+  chunks        VaultChunk[]
+}
+
+model VaultChunk {
+  id            String                 @id @default(cuid())
+  envelopeId    String
+  chunkIndex    Int
+  ciphertextHex String
+  authTagHex    String
+  envelope      EncryptedVaultEnvelope @relation(fields: [envelopeId], references: [id], onDelete: Cascade)
+
+  @@unique([envelopeId, chunkIndex])
+}

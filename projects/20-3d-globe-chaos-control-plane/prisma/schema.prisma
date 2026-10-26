@@ -1,0 +1,28 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model EdgeRegionCluster {
+  id          String               @id @default(cuid())
+  regionCode  String               @unique
+  status      String               @default("HEALTHY") // "HEALTHY" | "PARTITIONED"
+  trafficPct  Int                  @default(33)
+  updatedAt   DateTime             @updatedAt
+  experiments ChaosExperimentLog[]
+}
+
+model ChaosExperimentLog {
+  id          String            @id @default(cuid())
+  regionId    String
+  faultType   String
+  blastRadius String
+  createdAt   DateTime          @default(now())
+  region      EdgeRegionCluster @relation(fields: [regionId], references: [id], onDelete: Cascade)
+
+  @@index([regionId, createdAt])
+}

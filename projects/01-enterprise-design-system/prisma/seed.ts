@@ -1,26 +1,47 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import { prisma } from '../src/db';
 
-async function main() {
-  await prisma.componentToken.deleteMany({});
-  await prisma.designTokenAudit.deleteMany({});
-
-  await prisma.componentToken.createMany({
-    data: [
-      { component: 'SpatialSphere', category: '3d-material', cssVariable: '--primary-glow', value: '#38bdf8', roughness: 0.1, metalness: 0.9 },
-      { component: 'GlassCard', category: 'elevation', cssVariable: '--glass-blur', value: 'backdrop-blur-xl', roughness: 0.05, metalness: 0.2 },
-      { component: 'NeonButton', category: 'color', cssVariable: '--accent-neon', value: '#ec4899', roughness: 0.3, metalness: 0.7 },
-      { component: 'KineticHeading', category: 'typography', cssVariable: '--font-cinema', value: 'Cinematic Display, sans-serif', roughness: 0.5, metalness: 0.5 }
-    ]
+async function main(): Promise<void> {
+  const primary = await prisma.designToken.upsert({
+    where: { name: 'color.primary.accent' },
+    update: {},
+    create: {
+      name: 'color.primary.accent',
+      category: 'color',
+      cssVar: '--ds-color-primary',
+      value: '#38bdf8',
+      roughness: 0.15,
+      metalness: 0.85,
+    },
   });
 
-  await prisma.designTokenAudit.createMany({
-    data: [
-      { component: 'SpatialSphere', rulePassed: true, ruleName: 'spatial-depth-ratio', severity: 'info' },
-      { component: 'GlassCard', rulePassed: true, ruleName: 'contrast-wcag-aaa', severity: 'info' },
-      { component: 'NeonButton', rulePassed: true, ruleName: 'touch-target-44px', severity: 'info' }
-    ]
+  await prisma.designToken.upsert({
+    where: { name: 'color.surface.elevated' },
+    update: {},
+    create: {
+      name: 'color.surface.elevated',
+      category: 'color',
+      cssVar: '--ds-surface-elevated',
+      value: '#6366f1',
+      roughness: 0.32,
+      metalness: 0.65,
+    },
   });
-  console.log('01-enterprise-design-system seeded with 3D spatial materials');
+
+  await prisma.tokenRevision.create({
+    data: {
+      designTokenId: primary.id,
+      previousValue: '#0284c7',
+      nextValue: '#38bdf8',
+      author: 'system-seed',
+    },
+  });
 }
-main().catch(console.error).finally(() => prisma.$disconnect());
+
+main()
+  .catch((err: unknown) => {
+    console.error(err);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

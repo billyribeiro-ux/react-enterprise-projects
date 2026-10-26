@@ -1,23 +1,29 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import { prisma } from '../src/db';
 
-async function main() {
-  await prisma.kanbanTask.deleteMany({});
-  await prisma.kanbanColumn.deleteMany({});
-  await prisma.kanbanBoard.deleteMany({});
-
-  const b = await prisma.kanbanBoard.create({ data: { title: 'Cinematic Motion Architecture' } });
-  const c1 = await prisma.kanbanColumn.create({ data: { boardId: b.id, title: 'In Concept', order: 0 } });
-  const c2 = await prisma.kanbanColumn.create({ data: { boardId: b.id, title: 'Three.js Shaders', order: 1 } });
-  const c3 = await prisma.kanbanColumn.create({ data: { boardId: b.id, title: 'Production Ready', order: 2 } });
+async function main(): Promise<void> {
+  const board = await prisma.sprintBoard.upsert({
+    where: { slug: 'q4-platform-architecture' },
+    update: {},
+    create: {
+      slug: 'q4-platform-architecture',
+      title: 'Q4 Principal Architecture Sprint',
+    },
+  });
 
   await prisma.kanbanTask.createMany({
     data: [
-      { columnId: c1.id, title: 'Volumetric bloom shader integration', priority: 'critical', order: 0 },
-      { columnId: c2.id, title: 'GSAP smooth layout flip transitions', priority: 'high', order: 0 },
-      { columnId: c3.id, title: 'WCAG AAA contrast audit automation', priority: 'medium', order: 0 }
-    ]
+      { boardId: board.id, title: 'Zero-Allocation Ring Buffer', status: 'BACKLOG', orderRank: 1000, storyPoints: 8 },
+      { boardId: board.id, title: 'React 19 Optimistic Kanban', status: 'IN_PROGRESS', orderRank: 2000, storyPoints: 5 },
+      { boardId: board.id, title: 'Prisma v6 Multi-Model Schema', status: 'DONE', orderRank: 3000, storyPoints: 5 },
+    ],
   });
-  console.log('03-url-state-kanban seeded');
 }
-main().catch(console.error).finally(() => prisma.$disconnect());
+
+main()
+  .catch((err: unknown) => {
+    console.error(err);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

@@ -1,14 +1,42 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import { prisma } from '../src/db';
 
-async function main() {
-  await prisma.localizedArticle.deleteMany({});
-  await prisma.localizedArticle.createMany({
-    data: [
-      { slug: 'cloud-2026', locale: 'en-US', title: 'Global Cloud Security & Resilience', body: 'Modern enterprise systems mandate end-to-end zero-trust architecture.' },
-      { slug: 'cloud-2026', locale: 'ar-SA', title: 'أمن السحابة العالمية والمرونة', body: 'تفرض أنظمة المؤسسات الحديثة بنية انعدام الثقة الشاملة.' }
-    ]
+async function main(): Promise<void> {
+  const ns = await prisma.contentNamespace.upsert({
+    where: { nsKey: 'enterprise-docs' },
+    update: {},
+    create: { nsKey: 'enterprise-docs' },
   });
-  console.log('18-i18n-rtl-global-cms seeded');
+
+  await prisma.localizedArticle.upsert({
+    where: { slug_locale: { slug: 'cloud-2026', locale: 'en-US' } },
+    update: {},
+    create: {
+      namespaceId: ns.id,
+      slug: 'cloud-2026',
+      locale: 'en-US',
+      dir: 'ltr',
+      headline: 'Global Edge Mesh Architecture 2026',
+    },
+  });
+
+  await prisma.localizedArticle.upsert({
+    where: { slug_locale: { slug: 'cloud-2026', locale: 'ar-SA' } },
+    update: {},
+    create: {
+      namespaceId: ns.id,
+      slug: 'cloud-2026',
+      locale: 'ar-SA',
+      dir: 'rtl',
+      headline: 'هندسة الشبكة السحابية العالمية ٢٠٢٦',
+    },
+  });
 }
-main().catch(console.error).finally(() => prisma.$disconnect());
+
+main()
+  .catch((err: unknown) => {
+    console.error(err);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

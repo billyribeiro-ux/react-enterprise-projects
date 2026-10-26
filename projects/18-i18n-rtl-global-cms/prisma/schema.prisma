@@ -1,18 +1,27 @@
-// Prisma schema for 18-i18n-rtl-global-cms
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
 generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+model ContentNamespace {
+  id       String             @id @default(cuid())
+  nsKey    String             @unique
+  articles LocalizedArticle[]
 }
 
 model LocalizedArticle {
-  id        String   @id @default(cuid())
-  slug      String   @unique
-  locale    String
-  title     String
-  body      String
-  createdAt DateTime @default(now())
+  id          String           @id @default(cuid())
+  namespaceId String
+  slug        String
+  locale      String           // "en-US" | "ar-SA" | "ja-JP"
+  dir         String           @default("ltr")
+  headline    String
+  updatedAt   DateTime         @updatedAt
+  namespace   ContentNamespace @relation(fields: [namespaceId], references: [id], onDelete: Cascade)
+
+  @@unique([slug, locale])
 }

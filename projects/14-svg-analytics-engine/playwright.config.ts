@@ -1,0 +1,10 @@
+import { defineConfig } from '@playwright/test';
+
+export default defineConfig({
+  testDir: './tests',
+  testMatch: 'e2e.spec.ts',
+  use: {
+    headless: true,
+    viewport: { width: 1280, height: 800 },
+  },
+});

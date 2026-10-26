@@ -1,0 +1,27 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model TradingInstrument {
+  id        String           @id @default(cuid())
+  symbol    String           @unique
+  tickSize  Float            @default(0.5)
+  fills     LimitOrderFill[]
+}
+
+model LimitOrderFill {
+  id           String            @id @default(cuid())
+  instrumentId String
+  side         String            // "BUY" | "SELL"
+  price        Float
+  quantity     Float
+  executedAt   DateTime          @default(now())
+  instrument   TradingInstrument @relation(fields: [instrumentId], references: [id], onDelete: Cascade)
+
+  @@index([instrumentId, executedAt])
+}

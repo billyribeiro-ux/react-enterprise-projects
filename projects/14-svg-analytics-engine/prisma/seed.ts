@@ -1,17 +1,26 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import { prisma } from '../src/db';
 
-async function main() {
-  await prisma.metricTimeSeries.deleteMany({});
-  const rows = [];
-  for (let i = 0; i < 24; i++) {
-    rows.push({
-      metric: 'cluster_p99_latency',
-      timestamp: new Date(Date.now() - (24 - i) * 3600000),
-      value: 14.2 + Math.sin(i / 2) * 5
-    });
-  }
-  await prisma.metricTimeSeries.createMany({ data: rows });
-  console.log('14-svg-analytics-engine seeded with vector metrics');
+async function main(): Promise<void> {
+  const series = await prisma.metricSeries.upsert({
+    where: { seriesKey: 'cluster-health-radar' },
+    update: {},
+    create: { seriesKey: 'cluster-health-radar', unit: 'pct' },
+  });
+
+  await prisma.metricDatapoint.createMany({
+    data: [
+      { seriesId: series.id, axisLabel: 'Throughput', score: 96 },
+      { seriesId: series.id, axisLabel: 'Security', score: 100 },
+      { seriesId: series.id, axisLabel: 'CacheHit', score: 92 },
+    ],
+  });
 }
-main().catch(console.error).finally(() => prisma.$disconnect());
+
+main()
+  .catch((err: unknown) => {
+    console.error(err);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

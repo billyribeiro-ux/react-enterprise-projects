@@ -1,0 +1,29 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model WorkflowInstance {
+  id           String                  @id @default(cuid())
+  entityName   String
+  currentState String                  // "IDENTITY_CHECK" | "RISK_SCORING" | "COMPLIANCE_LOCK" | "PROVISIONED"
+  riskScore    Int                     @default(12)
+  updatedAt    DateTime                @updatedAt
+  transitions  WorkflowTransitionLog[]
+}
+
+model WorkflowTransitionLog {
+  id             String           @id @default(cuid())
+  instanceId     String
+  fromState      String
+  toState        String
+  idempotencyKey String
+  createdAt      DateTime         @default(now())
+  instance       WorkflowInstance @relation(fields: [instanceId], references: [id], onDelete: Cascade)
+
+  @@unique([instanceId, idempotencyKey])
+}

@@ -1,0 +1,28 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model SearchDocument {
+  id        String          @id @default(cuid())
+  docSlug   String          @unique
+  title     String
+  domain    String
+  docLength Int
+  postings  SearchPosting[]
+}
+
+model SearchPosting {
+  id            String         @id @default(cuid())
+  documentId    String
+  term          String
+  termFrequency Int
+  document      SearchDocument @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@unique([documentId, term])
+  @@index([term])
+}

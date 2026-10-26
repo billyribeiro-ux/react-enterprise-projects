@@ -1,26 +1,28 @@
-// Prisma schema for 08-ai-streaming-copilot
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
 generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
-}
-
-model CopilotConversation {
-  id        String           @id @default(cuid())
+model AiThread {
+  id        String      @id @default(cuid())
   title     String
-  messages  CopilotMessage[]
-  createdAt DateTime         @default(now())
+  createdAt DateTime    @default(now())
+  messages  AiMessage[]
 }
 
-model CopilotMessage {
-  id             String              @id @default(cuid())
-  conversationId String
-  conversation   CopilotConversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-  role           String
-  content        String
-  tokensUsed     Int                 @default(0)
-  createdAt      DateTime            @default(now())
+model AiMessage {
+  id         String   @id @default(cuid())
+  threadId   String
+  role       String   // "user" | "assistant"
+  content    String
+  tokenCount Int      @default(32)
+  ttftMs     Float    @default(28.4)
+  createdAt  DateTime @default(now())
+  thread     AiThread @relation(fields: [threadId], references: [id], onDelete: Cascade)
+
+  @@index([threadId, createdAt])
 }

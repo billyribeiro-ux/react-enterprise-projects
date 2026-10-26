@@ -1,118 +1,73 @@
-# Enterprise Full-Stack Suite &bull; React 19, Next.js, Node.js, Prisma ORM, Three.js & GSAP
+# Principal Engineer Level 8+ (Oct 26, 2026) — 20 Enterprise React 19, Next.js, Node 24 LTS, Prisma v6, Three.js & GSAP Projects
 
-[![Node.js LTS](https://img.shields.io/badge/Node.js-24%20LTS-brightgreen.svg)](https://nodejs.org/)
+[![Node.js LTS](https://img.shields.io/badge/Node.js-24.22.0%20LTS-brightgreen.svg)](https://nodejs.org/)
 [![pnpm](https://img.shields.io/badge/pnpm-12.14.0-orange.svg)](https://pnpm.io/)
-[![React 19](https://img.shields.io/badge/React-19.0.0-61dafb.svg)](https://react.dev/)
-[![Next.js](https://img.shields.io/badge/Next.js-App%20Router-black.svg)](https://nextjs.org/)
-[![Prisma ORM](https://img.shields.io/badge/Prisma-v6%20SQLite%2FPostgres-2D3748.svg)](https://www.prisma.io/)
-[![Three.js](https://img.shields.io/badge/Three.js-3D%20WebGL-blue.svg)](https://threejs.org/)
+[![React 19](https://img.shields.io/badge/React-19.1.0-61dafb.svg)](https://react.dev/)
+[![TypeScript 5.8](https://img.shields.io/badge/TypeScript-5.8%20Strict-3178c6.svg)](https://www.typescriptlang.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-15%20App%20Router-black.svg)](https://nextjs.org/)
+[![Prisma ORM](https://img.shields.io/badge/Prisma-v6%20Multi--Model-2D3748.svg)](https://www.prisma.io/)
+[![Three.js](https://img.shields.io/badge/Three.js-r173%20WebGL-blue.svg)](https://threejs.org/)
 [![GSAP](https://img.shields.io/badge/GSAP-3.12%20Kinetic-88CE02.svg)](https://greensock.com/gsap/)
-[![Vitest](https://img.shields.io/badge/Vitest-Unit%20Tests-yellow.svg)](https://vitest.dev/)
-[![Playwright](https://img.shields.io/badge/Playwright-E2E%20A11y-purple.svg)](https://playwright.dev/)
+[![Vitest](https://img.shields.io/badge/Vitest-3.0%20Unit-yellow.svg)](https://vitest.dev/)
+[![Playwright](https://img.shields.io/badge/Playwright-1.51%20E2E-purple.svg)](https://playwright.dev/)
 
-A production-grade, enterprise-caliber suite of **20 full-stack projects** engineered to the highest standards of architectural excellence, sub-16ms INP, and WCAG 2.2 AAA compliance. Styled with Hollywood/Apple/Netflix cinematic visual flair, Three.js 3D spatial graphics, GSAP physics animations, and interactive follow-along course studio portal.
-
----
-
-## 🏛️ Architectural Foundations
-
-- **Package Manager**: Strictly **`pnpm`** (v12.14.0) with Turborepo task caching.
-- **Runtimes**: Node.js **v24.22.0 LTS**.
-- **Frontend Stack**: React 19 (Server Components, `useActionState`, `useOptimistic`, `use`), Next.js App Router (Streaming Suspense, Partial Prerendering - PPR), Vite 6.
-- **Persistence Layer**: **Prisma ORM v6** with zero-config SQLite (`file:./dev.db`) for immediate local runs and seamless portability to PostgreSQL; client singleton pattern preventing pool exhaustion.
-- **3D & Kinetic Motion**: Three.js WebGL shaders and PBR physical materials paired with GSAP 3.12 kinetic motion timelines.
-- **Verification Engine**: Vitest for lightning-fast component testing + Playwright for end-to-end headless browser journeys.
+An audited, Distinguished Principal Engineer (Level 8+ as of Oct 26, 2026) monorepo of **20 full-stack enterprise projects** and **21 interactive follow-along HTML course pages** (`index.html` + `projects/<id>/index.html`). Every project enforces **zero `any` types**, **`noUncheckedIndexedAccess`**, **`exactOptionalPropertyTypes`**, **React 19 concurrent `useOptimistic` / `useActionState` transitions**, **multi-model relational Prisma v6 schemas**, **Three.js 3D WebGL / GSAP 120fps motion / SVG KPI telemetry**, and **100% untruncated step-by-step follow-along instructions**.
 
 ---
 
-## 🚀 The 20 Enterprise Projects
+## 🏛️ Principal Engineer Level 8+ Standards Enforced (Oct 26, 2026)
 
-### **Tier 1: Enterprise Foundations & State Architectures**
-- **`01-enterprise-design-system`**: Polymorphic accessible component library with Three.js 3D spatial material inspector and GSAP kinetic typography.
-- **`02-saas-billing-dashboard`**: Apple Keynote/Netflix-style revenue telemetry with GSAP animated KPI counters and SVG circular progress dials.
-- **`03-url-state-kanban`**: URL search params state synchronization (`nuqs`), drag-and-drop spring physics, and Prisma Task persistence.
-- **`04-multi-step-wizard`**: 5-step enterprise onboarding wizard with Zod validation, auto-saving drafts to SQLite, and live compliance scoring.
-- **`05-virtual-audit-feed`**: 100k+ item infinite virtual scroll feed with glowing severity matrix and cursor-based Prisma pagination.
-
-### **Tier 2: Real-Time Systems, Concurrency & Stream Processing**
-- **`06-realtime-collab-doc`**: CRDT-inspired real-time document editor with glowing presence avatars and optimistic block locking.
-- **`07-crypto-order-book`**: Three.js 3D depth terrain mountains with WebGL shaders and Canvas 60fps order book visualizer.
-- **`08-ai-streaming-copilot`**: Next.js App Router streaming Route Handler, React 19 `useOptimistic` chat interface, and token usage metrics.
-- **`09-enterprise-rbac-auth`**: Zero-trust identity engine with PBKDF2 hashing, fine-grained permission matrix, and glowing security badges.
-- **`10-web-audio-daw`**: Hollywood Sci-Fi WebGL 3D frequency ribbon undulating to synthetic waveforms with a 4-track step sequencer.
-
-### **Tier 3: Distributed Architectures, Offline-First & Resilient Caching**
-- **`11-offline-pwa-notes`**: Local-first Markdown knowledge base with IndexedDB offline persistence and bidirectional sync.
-- **`12-ecommerce-ppr-storefront`**: Sub-10ms Partial Prerendering (PPR) storefront combining static prerendered shells with streaming inventory.
-- **`13-distributed-job-queue`**: BullMQ-style background worker telemetry in SQLite with dead-letter queue (DLQ) and auto-retries.
-- **`14-svg-analytics-engine`**: Cyberpunk reactive vector SVG charting engine with zero external chart library overhead and glowing radar rings.
-- **`15-resumable-file-vault`**: Three.js 3D rotating cryptographic vault cylinders with SHA-256 chunked streaming and pause/resume.
-
-### **Tier 4: Enterprise Capstones, High-Scale Edge & Federated Systems**
-- **`16-micro-frontend-federation`**: Host container shell dynamically loading isolated remote micro-apps with shared React 19 runtime singletons.
-- **`17-stripe-webhook-engine`**: Idempotent payment pipeline with HMAC-SHA256 signature verification and replay attack prevention.
-- **`18-i18n-rtl-global-cms`**: Internationalized CMS with dynamic Arabic/Hebrew RTL mirroring and ICU message formatting.
-- **`19-inverted-search-engine`**: High-performance full-text search engine with BM25 relevance scoring and tokenized inverted posting lists.
-- **`20-cloud-observability-os`**: Datadog/CloudWatch caliber telemetry platform with interactive Three.js 3D global cluster mesh and APM flamegraphs.
+1. **Strict TypeScript 5.8 (`tsconfig.base.json`)**:
+   - `strict: true`, `noUncheckedIndexedAccess: true`, `exactOptionalPropertyTypes: true`.
+   - Zero `: any`, `as any`, or `<any>` across all 20 projects (`ActionResult<T>` discriminated unions and `catch (err: unknown)` throughout).
+2. **React 19 Concurrent Transitions**:
+   - `useOptimistic` updates execute strictly inside `startTransition` or form `action` boundaries, separating controlled draft state from optimistic server state.
+3. **WebGL Lifecycle & Headless Safety**:
+   - `THREE.WebGLRenderer` initializes once on mount with headless `jsdom` guards (`canvas.getContext('webgl2') ?? canvas.getContext('webgl')`), mutates PBR uniforms reactively via GSAP without recreating GPU contexts, and disposes `BufferGeometry`, `Material`, and `WebGLRenderer` on unmount.
+4. **Multi-Model Relational Prisma ORM v6 Schemas**:
+   - Every project models normalized relational tables (`@relation`, composite `@@index`, and composite `@@unique` constraints such as `@@unique([slug, locale])` in Project 18) with idempotent `prisma/seed.ts` scripts.
+5. **100% Untruncated Follow-Along Course HTML Suite**:
+   - Both the root Master Studio Portal (`index.html` + `projects-data.js`) and all 20 standalone project course pages (`projects/<id>/index.html`) embed 100% byte-for-byte complete, untruncated source files across 5 narrated engineering steps per project.
 
 ---
 
-## 🎨 Master Interactive Follow-Along Course Studio Portal
+## 🚀 The 20 Audited Enterprise Projects
 
-Launch the standalone interactive studio portal:
+| # | Project Directory | Architectural Domain & Key L8+ Mechanics | Standalone Course HTML |
+|---|---|---|---|
+| **01** | `projects/01-enterprise-design-system` | Polymorphic React 19 primitives, OKLCH `@layer` tokens, Three.js PBR TorusKnot shader studio, `DesignToken` + `TokenRevision` Prisma v6 schema | `projects/01-enterprise-design-system/index.html` |
+| **02** | `projects/02-saas-billing-dashboard` | Multi-tenant SaaS billing, Optimistic Concurrency Control (`version` lock), GSAP radial ARR/NRR SVG gauges, WCAG 2.2 AAA tier controls | `projects/02-saas-billing-dashboard/index.html` |
+| **03** | `projects/03-url-state-kanban` | O(1) LexoRank fractional indexing (`(prev + next) / 2`), URL `searchParams` deep-link state, GSAP kinetic layout transitions | `projects/03-url-state-kanban/index.html` |
+| **04** | `projects/04-state-machine-wizard` | Impossible-state-free Deterministic Finite Automaton (DFA), idempotent saga checkpoints (`@@unique([instanceId, idempotencyKey])`), SVG DAG | `projects/04-state-machine-wizard/index.html` |
+| **05** | `projects/05-command-palette-engine` | Weighted subsequence + frequency scorer (`log2(invocations + 1)`), React 19 `useDeferredValue`, WAI-ARIA 1.2 Combobox | `projects/05-command-palette-engine/index.html` |
+| **06** | `projects/06-virtualized-telemetry-grid` | O(1) DOM windowing over 100,000 log streams (<25 DOM nodes mounted), GPU `translate3d` positioning, Prisma keyset cursor pagination | `projects/06-virtualized-telemetry-grid/index.html` |
+| **07** | `projects/07-collaborative-spatial-canvas` | LWW-Element-Set CRDT with Lamport logical clocks (`lamportTs`), Three.js 3D spatial scene graph, atomic stale-packet rejection | `projects/07-collaborative-spatial-canvas/index.html` |
+| **08** | `projects/08-ai-streaming-copilot` | React 19 `useOptimistic` inside `startTransition`, TTFT telemetry, `AiThread` + `AiMessage` Prisma persistence | `projects/08-ai-streaming-copilot/index.html` |
+| **09** | `projects/09-zero-trust-rbac-console` | O(1) bitwise capability matrix (`(mask & bit) === bit`), `IamRole` + `IamPermissionGrant` + `SecurityAuditEntry` ledger | `projects/09-zero-trust-rbac-console/index.html` |
+| **10** | `projects/10-trading-orderbook-terminal` | Zero-allocation `Float64Array` circular ring buffer, `requestAnimationFrame` UI flush, Three.js 3D liquidity depth surface | `projects/10-trading-orderbook-terminal/index.html` |
+| **11** | `projects/11-offline-first-sync-engine` | Local-first mutation outbox queue, monotonic `SyncVectorClock` reconciliation (`@@unique([documentId, replicaId])`) | `projects/11-offline-first-sync-engine/index.html` |
+| **12** | `projects/12-edge-commerce-checkout` | Zero-oversell atomic SQL predicate (`availableStock: { gte: quantity }`), idempotent `InventoryReservation` tokens | `projects/12-edge-commerce-checkout/index.html` |
+| **13** | `projects/13-visual-dag-pipeline-builder` | Kahn's `O(V + E)` topological sort & cycle detector, SVG cubic Bezier pipeline graph, `DeadLetterJob` isolation | `projects/13-visual-dag-pipeline-builder/index.html` |
+| **14** | `projects/14-svg-analytics-engine` | Zero-dependency trigonometric polar-to-Cartesian SVG radar polygons, safe single-point denominator guards, `MetricSeries` rollups | `projects/14-svg-analytics-engine/index.html` |
+| **15** | `projects/15-zero-knowledge-crypto-vault` | Client-side PBKDF2 (310k iterations) + AES-GCM-256 envelope sealing, Three.js 3D entropy lattice, opaque `VaultChunk` storage | `projects/15-zero-knowledge-crypto-vault/index.html` |
+| **16** | `projects/16-micro-frontend-shell` | Per-remote React ErrorBoundary blast-radius isolation, SHA-384 Subresource Integrity (SRI) verification, `RemoteDeploymentHistory` | `projects/16-micro-frontend-shell/index.html` |
+| **17** | `projects/17-resilient-webhook-gateway` | 3-state Circuit Breaker FSM (`CLOSED -> OPEN -> HALF_OPEN`), AWS full-jitter exponential backoff, `WebhookEventLog` | `projects/17-resilient-webhook-gateway/index.html` |
+| **18** | `projects/18-i18n-rtl-global-cms` | Zero-CLS BiDi LTR/RTL switching via CSS Logical Properties, composite `@@unique([slug, locale])` multi-locale schema | `projects/18-i18n-rtl-global-cms/index.html` |
+| **19** | `projects/19-fulltext-search-faceted-engine` | Okapi BM25 probabilistic ranking (`k1 = 1.5, b = 0.75`), disjunctive domain facets, normalized `SearchPosting` inverted index | `projects/19-fulltext-search-faceted-engine/index.html` |
+| **20** | `projects/20-3d-globe-chaos-control-plane` | Three.js 3D global edge mesh, Anycast BGP regional failover simulator, 5-Nines SLA monitor, `ChaosExperimentLog` | `projects/20-3d-globe-chaos-control-plane/index.html` |
+
+---
+
+## 🔍 Running the Principal Engineer L8+ Verification Suite
+
 ```bash
+# 1. Regenerate all 20 projects and 21 interactive HTML course files
+python3 scripts/build_projects.py
+python3 scripts/build_course_portal.py
+
+# 2. Run the automated L8+ Zero-Drift, Zero-Any & Completeness Auditor
+python3 scripts/verify_l8_audit.py
+
+# 3. Open the Master Interactive Course Studio Portal
 open index.html
-# or serve via local webserver:
-pnpm portal:serve
 ```
-
-The portal provides:
-- **Interactive Three.js 3D WebGL Background**: Responsive particle constellation and crystalline lattice.
-- **Embedded Monaco Code Editor**: Syntax highlighting, copyable code, and instant multi-tab inspection.
-- **5-Step Guided Blueprints**: Exact code, setup, and verification recipes so anyone can recreate every project from scratch.
-- **Live 3D Simulation Viewport**: Run and interact with the 3D WebGL scenes, audio ribbons, and radar vector charts directly in the browser.
-- **macOS `gh` CLI Cheatsheet**: Copy-ready commands for repo provisioning, PR management, and GitHub Actions CI.
-
----
-
-## 💻 macOS GitHub CLI (`gh`) Automation Commands
-
-```bash
-# 1. Verify GitHub authentication status
-pnpm gh:check
-# (Runs: gh auth status)
-
-# 2. Provision and publish to GitHub
-pnpm gh:create
-# (Runs: gh repo create billyribeiro-ux/react-enterprise-projects --public --source=. --remote=origin --push)
-
-# 3. Monitor GitHub Actions CI status
-pnpm gh:ci
-# (Runs: gh run list --limit 5)
-
-# 4. Automate PR creation
-pnpm gh:pr
-# (Runs: gh pr create --fill)
-```
-
----
-
-## 🧪 Testing Matrix
-
-```bash
-# Run Vitest unit & component specs across all projects
-pnpm test
-
-# Run Playwright end-to-end headless browser tests
-pnpm test:e2e
-
-# Run Prisma schema migrations and generate client
-pnpm db:generate
-pnpm db:push
-pnpm db:seed
-```
-
----
-
-## 📄 License
-MIT &bull; Authored by Billy Ribeiro

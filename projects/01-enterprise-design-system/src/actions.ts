@@ -1,37 +1,89 @@
 'use server';
-import { prisma } from '../lib/prisma';
+
 import { z } from 'zod';
+import { prisma } from './db';
+
+export interface DesignTokenRecord {
+  id: string;
+  name: string;
+  category: string;
+  cssVar: string;
+  value: string;
+  roughness: number;
+  metalness: number;
+}
+
+export type ActionResult<T> =
+  | { status: 'idle' }
+  | { status: 'success'; data: T }
+  | { status: 'error'; message: string };
 
 const UpdateTokenSchema = z.object({
-  id: z.string(),
-  value: z.string().min(1, 'Token value required'),
-  roughness: z.number().min(0).max(1).optional(),
-  metalness: z.number().min(0).max(1).optional()
+  name: z.string().min(3),
+  value: z.string().regex(/^#[0-9a-fA-F]{6}$/, 'Must be a valid 6-digit hex color'),
+  roughness: z.coerce.number().min(0).max(1).optional(),
+  metalness: z.coerce.number().min(0).max(1).optional(),
 });
 
-export async function updateDesignToken(prevState: any, formData: FormData) {
+export async function updateDesignTokenAction(
+  _prevState: ActionResult<DesignTokenRecord>,
+  formData: FormData
+): Promise<ActionResult<DesignTokenRecord>> {
   const parsed = UpdateTokenSchema.safeParse({
-    id: formData.get('id'),
+    name: formData.get('name'),
     value: formData.get('value'),
-    roughness: formData.get('roughness') ? Number(formData.get('roughness')) : 0.2,
-    metalness: formData.get('metalness') ? Number(formData.get('metalness')) : 0.8
+    roughness: formData.get('roughness') ?? undefined,
+    metalness: formData.get('metalness') ?? undefined,
   });
 
   if (!parsed.success) {
-    return { success: false, error: parsed.error.issues[0]?.message };
+    const firstIssue = parsed.error.issues[0];
+    return {
+      status: 'error',
+      message: firstIssue ? firstIssue.message : 'Invalid design token payload',
+    };
   }
 
   try {
-    const updated = await prisma.componentToken.update({
-      where: { id: parsed.data.id },
-      data: {
-        value: parsed.data.value,
-        roughness: parsed.data.roughness,
-        metalness: parsed.data.metalness
-      }
+    const roughness = parsed.data.roughness ?? 0.2;
+    const metalness = parsed.data.metalness ?? 0.8;
+
+    const existing = await prisma.designToken.findUnique({
+      where: { name: parsed.data.name },
     });
-    return { success: true, token: updated };
-  } catch (err: any) {
-    return { success: false, error: err.message };
+
+    const updated = await prisma.designToken.upsert({
+      where: { name: parsed.data.name },
+      update: {
+        value: parsed.data.value,
+        ...(parsed.data.roughness !== undefined ? { roughness: parsed.data.roughness } : {}),
+        ...(parsed.data.metalness !== undefined ? { metalness: parsed.data.metalness } : {}),
+      },
+      create: {
+        name: parsed.data.name,
+        category: 'color',
+        cssVar: `--ds-${parsed.data.name.replace(/\./g, '-')}`,
+        value: parsed.data.value,
+        roughness,
+        metalness,
+      },
+    });
+
+    if (existing && existing.value !== parsed.data.value) {
+      await prisma.tokenRevision.create({
+        data: {
+          designTokenId: updated.id,
+          previousValue: existing.value,
+          nextValue: parsed.data.value,
+        },
+      });
+    }
+
+    return { status: 'success', data: updated };
+  } catch (err: unknown) {
+    return {
+      status: 'error',
+      message: err instanceof Error ? err.message : 'Database persistence error',
+    };
   }
 }

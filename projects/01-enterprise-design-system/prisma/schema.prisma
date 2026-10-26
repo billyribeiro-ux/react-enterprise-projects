@@ -1,30 +1,34 @@
-// Prisma schema for 01-enterprise-design-system
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
 generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
-}
-
-model ComponentToken {
-  id          String   @id @default(cuid())
-  component   String   @unique
-  category    String   // 'typography' | 'color' | 'spacing' | 'elevation' | '3d-material'
-  cssVariable String
+model DesignToken {
+  id          String          @id @default(cuid())
+  name        String          @unique
+  category    String          // "color" | "spacing" | "elevation"
+  cssVar      String          @unique
   value       String
-  roughness   Float    @default(0.2)
-  metalness   Float    @default(0.8)
-  updatedAt   DateTime @updatedAt
-  createdAt   DateTime @default(now())
+  roughness   Float           @default(0.2)
+  metalness   Float           @default(0.8)
+  updatedAt   DateTime        @updatedAt
+  revisions   TokenRevision[]
+
+  @@index([category])
 }
 
-model DesignTokenAudit {
-  id         String   @id @default(cuid())
-  component  String
-  rulePassed Boolean  @default(true)
-  ruleName   String   // 'contrast-wcag-aaa' | 'touch-target-44px' | 'spatial-depth-ratio'
-  severity   String   @default("info")
-  createdAt  DateTime @default(now())
+model TokenRevision {
+  id            String      @id @default(cuid())
+  designTokenId String
+  previousValue String
+  nextValue     String
+  author        String      @default("principal-architect")
+  createdAt     DateTime    @default(now())
+  designToken   DesignToken @relation(fields: [designTokenId], references: [id], onDelete: Cascade)
+
+  @@index([designTokenId, createdAt])
 }

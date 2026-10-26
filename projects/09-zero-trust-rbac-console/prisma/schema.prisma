@@ -1,0 +1,40 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model IamRole {
+  id             String               @id @default(cuid())
+  roleSlug       String               @unique
+  displayName    String
+  capabilityMask Int                  @default(1)
+  updatedAt      DateTime             @updatedAt
+  grants         IamPermissionGrant[]
+  audits         SecurityAuditEntry[]
+}
+
+model IamPermissionGrant {
+  id             String   @id @default(cuid())
+  roleId         String
+  permissionCode String
+  bitValue       Int
+  role           IamRole  @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@unique([roleId, permissionCode])
+}
+
+model SecurityAuditEntry {
+  id           String   @id @default(cuid())
+  roleId       String
+  actor        String
+  previousMask Int
+  nextMask     Int
+  createdAt    DateTime @default(now())
+  role         IamRole  @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@index([roleId, createdAt])
+}

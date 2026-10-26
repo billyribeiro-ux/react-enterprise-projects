@@ -1,0 +1,29 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model OmniCommand {
+  id          String                 @id @default(cuid())
+  slug        String                 @unique
+  title       String
+  shortcut    String
+  category    String
+  invocations Int                    @default(1)
+  updatedAt   DateTime               @updatedAt
+  executions  CommandExecutionAudit[]
+
+  @@index([invocations])
+}
+
+model CommandExecutionAudit {
+  id        String      @id @default(cuid())
+  commandId String
+  actor     String      @default("principal-eng")
+  createdAt DateTime    @default(now())
+  command   OmniCommand @relation(fields: [commandId], references: [id], onDelete: Cascade)
+}

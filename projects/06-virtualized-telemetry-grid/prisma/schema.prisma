@@ -1,0 +1,28 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model ServiceIngestQuota {
+  id           String           @id @default(cuid())
+  serviceName  String           @unique
+  maxRps       Int              @default(50000)
+  events       TelemetryEvent[]
+}
+
+model TelemetryEvent {
+  id          String             @id @default(cuid())
+  serviceId   String
+  traceId     String             @unique
+  severity    String             // "INFO" | "WARN" | "ERROR"
+  latencyMs   Float
+  message     String
+  createdAt   DateTime           @default(now())
+  service     ServiceIngestQuota @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  @@index([serviceId, createdAt, id])
+}

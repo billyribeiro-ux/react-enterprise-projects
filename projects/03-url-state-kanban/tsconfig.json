@@ -1,12 +1,12 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "jsx": "react-jsx",
     "baseUrl": "."
   },
   "include": [
-    "src",
-    "lib",
-    "prisma",
-    "tests"
+    "src/**/*",
+    "prisma/**/*",
+    "tests/**/*"
   ]
 }
