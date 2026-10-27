@@ -23,6 +23,24 @@ def main() -> None:
     assert ".slice(0, 800)" not in master_html, "Found forbidden code truncation in root index.html"
     assert not re.search(r"<style\b|\bstyle\s*=", master_html, re.I), "Forbidden inline CSS in root index.html"
 
+    required_css_primitives = [
+        "@layer reset, tokens, base, layout, components, utilities;",
+        "--color-surface-bg:",
+        "--color-brand-primary:",
+        "oklch(from ",
+        "color-mix(in oklch,",
+        "clamp(",
+        "@container",
+        ":has(",
+        "@starting-style",
+        "text-wrap: balance",
+        "100dvh",
+        "padding-inline",
+    ]
+    portal_css = (ROOT / "portal.css").read_text()
+    for prim in required_css_primitives:
+        assert prim in portal_css, f"Missing Oct 27, 2026 CSS primitive `{prim}` in portal.css"
+
     total_files_verified = 0
     for p in data:
         pid = p["id"]
@@ -71,6 +89,10 @@ def main() -> None:
         proj_html = (pdir / "index.html").read_text()
         assert not re.search(r"<style\b|\bstyle\s*=", proj_html, re.I), f"Forbidden inline CSS in {pid}/index.html"
         assert (pdir / "course.css").exists() and (pdir / "course.js").exists(), f"Missing external course.css/js in {pid}"
+        for css_file in [pdir / "src" / "styles.css", pdir / "course.css"]:
+            css_txt = css_file.read_text()
+            for prim in required_css_primitives:
+                assert prim in css_txt, f"Missing Oct 27, 2026 CSS primitive `{prim}` in {css_file}"
         assert html.escape(disk_comp) in proj_html, f"Untruncated component code missing from {pid}/index.html"
         assert html.escape(disk_actions) in proj_html, f"Untruncated actions code missing from {pid}/index.html"
         assert html.escape(disk_schema) in proj_html, f"Untruncated schema code missing from {pid}/index.html"
