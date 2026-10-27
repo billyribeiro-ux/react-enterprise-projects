@@ -1,4 +1,5 @@
 'use client';
+import './styles.css';
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
@@ -103,62 +104,38 @@ export function SpatialCanvasStudio(): React.JSX.Element {
   return (
     <section
       aria-label="Real-Time Collaborative 3D Spatial Canvas"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-        gap: '1.5rem',
-      }}
+      className="l8-styled-node"
     >
       <div>
-        <span style={{ color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700 }}>
+        <span className="l8-styled-node">
           LWW-ELEMENT-SET CRDT • LAMPORT LOGICAL CLOCK
         </span>
-        <h2 style={{ fontSize: '1.45rem', fontWeight: 800, margin: '0.35rem 0 1rem' }}>
+        <h2 className="l8-styled-node">
           {node.label}
         </h2>
-        <p data-testid="spatial-coords" style={{ fontFamily: 'monospace', color: '#4ade80' }}>
+        <p data-testid="spatial-coords" className="l8-styled-node">
           Vector3({node.x}, {node.y}, {node.z}) • Lamport Clock: v{node.lamportTs} ({node.peerId})
         </p>
 
-        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginTop: '1rem' }}>
+        <div className="l8-styled-node">
           <button
             type="button"
             onClick={() => applyTransform(0.5, 0.25, node.lamportTs + 1, 'peer-beta')}
-            style={{
-              padding: '0.65rem 1rem',
-              borderRadius: '10px',
-              background: '#38bdf8',
-              color: '#090d16',
-              fontWeight: 700,
-              border: 'none',
-              cursor: 'pointer',
-            }}
+            className="l8-styled-node"
           >
             Broadcast Valid Peer Transform (ts+1)
           </button>
           <button
             type="button"
             onClick={() => applyTransform(99, 99, node.lamportTs - 1, 'peer-stale')}
-            style={{
-              padding: '0.65rem 1rem',
-              borderRadius: '10px',
-              background: '#1e293b',
-              color: '#94a3b8',
-              border: '1px solid rgba(255,255,255,0.15)',
-              cursor: 'pointer',
-            }}
+            className="l8-styled-node"
           >
             Simulate Stale Packet (ts-1)
           </button>
         </div>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', background: '#0f172a', borderRadius: '14px', padding: '1rem' }}>
+      <div className="l8-styled-node">
         <canvas ref={canvasRef} width={340} height={220} aria-label="3D Spatial Mesh Canvas" />
       </div>
     </section>

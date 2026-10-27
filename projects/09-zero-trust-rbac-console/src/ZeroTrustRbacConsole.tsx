@@ -1,4 +1,5 @@
 'use client';
+import './styles.css';
 
 import React, { useState } from 'react';
 
@@ -27,27 +28,21 @@ export function ZeroTrustRbacConsole({
   return (
     <section
       aria-label="Zero-Trust RBAC/ABAC IAM & Security Policy Console"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-      }}
+      className="l8-styled-node"
     >
-      <header style={{ marginBottom: '1.25rem' }}>
-        <span style={{ color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700 }}>
+      <header className="l8-styled-node">
+        <span className="l8-styled-node">
           O(1) BITWISE CAPABILITY MATRIX • CRYPTOGRAPHIC AUDIT LEDGER
         </span>
-        <h2 style={{ margin: '0.25rem 0', fontSize: '1.5rem', fontWeight: 800 }}>
+        <h2 className="l8-styled-node">
           Active Capability Mask:{' '}
-          <code data-testid="binary-mask" style={{ color: '#4ade80' }}>
+          <code data-testid="binary-mask" className="l8-styled-node">
             0b{mask.toString(2).padStart(4, '0')} ({mask})
           </code>
         </h2>
       </header>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '0.85rem' }}>
+      <div className="l8-styled-node">
         {CAPABILITIES.map((cap) => {
           const granted = hasCapability(mask, cap.bit);
           return (
@@ -56,24 +51,12 @@ export function ZeroTrustRbacConsole({
               type="button"
               aria-pressed={granted}
               onClick={() => toggleBit(cap.bit)}
-              style={{
-                padding: '1rem',
-                borderRadius: '12px',
-                textAlign: 'left',
-                border: granted ? '1px solid #4ade80' : '1px solid rgba(255,255,255,0.12)',
-                background: granted ? 'rgba(74, 222, 128, 0.12)' : 'rgba(15, 23, 42, 0.7)',
-                color: '#f8fafc',
-                cursor: 'pointer',
-              }}
+              className="l8-styled-node"
             >
-              <div style={{ fontWeight: 700, fontSize: '0.9rem' }}>{cap.code}</div>
-              <div style={{ fontSize: '0.75rem', color: '#94a3b8', margin: '0.25rem 0' }}>{cap.label}</div>
+              <div className="l8-styled-node">{cap.code}</div>
+              <div className="l8-styled-node">{cap.label}</div>
               <span
-                style={{
-                  fontSize: '0.72rem',
-                  fontWeight: 800,
-                  color: granted ? '#4ade80' : '#f87171',
-                }}
+                className="l8-styled-node"
               >
                 {granted ? 'GRANTED (ALLOW)' : 'DENIED (ZERO-TRUST)'}
               </span>

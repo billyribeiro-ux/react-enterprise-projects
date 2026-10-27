@@ -193,6 +193,7 @@ export async function drainOfflineOutboxAction(
 """,
         "component_name": "OfflineSyncEngine",
         "component_ts": """'use client';
+import './styles.css';
 
 import React, { useState } from 'react';
 
@@ -229,21 +230,15 @@ export function OfflineSyncEngine(): React.JSX.Element {
   return (
     <section
       aria-label="Offline-First Local-First Sync & Outbox Engine"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-      }}
+      className="l8-styled-node"
     >
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+      <header className="l8-styled-node">
         <div>
-          <span style={{ color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700 }}>
+          <span className="l8-styled-node">
             LOCAL-FIRST OUTBOX • MONOTONIC VECTOR CLOCK
           </span>
-          <h2 style={{ margin: '0.25rem 0', fontSize: '1.45rem', fontWeight: 800 }}>
-            Vector Clock: <code data-testid="vector-clock" style={{ color: '#4ade80' }}>v{vectorClock}</code> • Outbox:{' '}
+          <h2 className="l8-styled-node">
+            Vector Clock: <code data-testid="vector-clock" className="l8-styled-node">v{vectorClock}</code> • Outbox:{' '}
             <span data-testid="outbox-count">{outbox.length}</span> queued
           </h2>
         </div>
@@ -252,15 +247,7 @@ export function OfflineSyncEngine(): React.JSX.Element {
           type="button"
           aria-pressed={isOnline}
           onClick={toggleNetworkAndFlush}
-          style={{
-            padding: '0.6rem 1rem',
-            borderRadius: '10px',
-            background: isOnline ? '#10b981' : '#f59e0b',
-            color: '#090d16',
-            fontWeight: 800,
-            border: 'none',
-            cursor: 'pointer',
-          }}
+          className="l8-styled-node"
         >
           {isOnline ? 'Status: ONLINE (Synced)' : 'Status: OFFLINE (Click to Reconnect & Drain)'}
         </button>
@@ -269,15 +256,7 @@ export function OfflineSyncEngine(): React.JSX.Element {
       <button
         type="button"
         onClick={queueMutation}
-        style={{
-          padding: '0.65rem 1.15rem',
-          borderRadius: '10px',
-          background: '#38bdf8',
-          color: '#090d16',
-          fontWeight: 700,
-          border: 'none',
-          cursor: 'pointer',
-        }}
+        className="l8-styled-node"
       >
         Commit Local Document Edit
       </button>
@@ -476,6 +455,7 @@ export async function reserveFlashInventoryAction(
 """,
         "component_name": "EdgeCommerceCheckout",
         "component_ts": """'use client';
+import './styles.css';
 
 import React, { useState } from 'react';
 
@@ -496,24 +476,18 @@ export function EdgeCommerceCheckout({
   return (
     <section
       aria-label="Edge-First High-Concurrency Flash Sale Engine"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-      }}
+      className="l8-styled-node"
     >
-      <span style={{ color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700 }}>
+      <span className="l8-styled-node">
         ZERO-OVERSELL ATOMIC PREDICATE • IDEMPOTENT RESERVATION LOCK
       </span>
-      <h2 style={{ margin: '0.35rem 0', fontSize: '1.5rem', fontWeight: 800 }}>
+      <h2 className="l8-styled-node">
         SKU: NV-BLACKWELL-ULTRA • Remaining Stock:{' '}
-        <span data-testid="stock-remaining" style={{ color: stock > 0 ? '#4ade80' : '#f87171' }}>
+        <span data-testid="stock-remaining" className="l8-styled-node">
           {stock}
         </span>
       </h2>
-      <p style={{ color: '#94a3b8', fontSize: '0.85rem' }}>
+      <p className="l8-styled-node">
         Confirmed Atomic Reservations: <strong data-testid="reserved-count">{reservedCount}</strong>
       </p>
 
@@ -521,16 +495,7 @@ export function EdgeCommerceCheckout({
         type="button"
         disabled={stock === 0}
         onClick={handleAtomicReserve}
-        style={{
-          marginTop: '0.75rem',
-          padding: '0.75rem 1.35rem',
-          borderRadius: '10px',
-          background: stock > 0 ? '#38bdf8' : '#334155',
-          color: '#090d16',
-          fontWeight: 800,
-          border: 'none',
-          cursor: stock > 0 ? 'pointer' : 'not-allowed',
-        }}
+        className="l8-styled-node"
       >
         {stock > 0 ? 'Execute Atomic 1-Unit Reservation' : 'SOLD OUT (Zero Oversell Verified)'}
       </button>
@@ -744,6 +709,7 @@ export async function saveDagTopologyAction(
 """,
         "component_name": "DagPipelineStudio",
         "component_ts": """'use client';
+import './styles.css';
 
 import React, { useState } from 'react';
 import { kahnTopologicalSort } from './actions';
@@ -774,27 +740,21 @@ export function DagPipelineStudio(): React.JSX.Element {
   return (
     <section
       aria-label="Visual DAG Pipeline Builder & Kahn Topological Scheduler"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-      }}
+      className="l8-styled-node"
     >
-      <span style={{ color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700 }}>
+      <span className="l8-styled-node">
         KAHN O(V+E) TOPOLOGICAL SCHEDULER • DEAD-LETTER ISOLATION
       </span>
-      <h2 style={{ margin: '0.35rem 0', fontSize: '1.45rem', fontWeight: 800 }}>
+      <h2 className="l8-styled-node">
         Topological Plan:{' '}
-        <code data-testid="topo-order" style={{ color: '#4ade80' }}>
+        <code data-testid="topo-order" className="l8-styled-node">
           {currentOrder.join(' → ')}
         </code>
       </h2>
 
       <svg
         viewBox="0 0 500 90"
-        style={{ width: '100%', maxWidth: '600px', background: '#0f172a', borderRadius: '12px', margin: '1rem 0' }}
+        className="l8-styled-node"
       >
         <path d="M 70 45 C 120 15, 150 75, 190 45" fill="none" stroke="#38bdf8" strokeWidth="2.5" />
         <path d="M 190 45 C 240 15, 270 75, 310 45" fill="none" stroke="#38bdf8" strokeWidth="2.5" />
@@ -809,26 +769,18 @@ export function DagPipelineStudio(): React.JSX.Element {
         ))}
       </svg>
 
-      <div style={{ display: 'flex', gap: '0.75rem' }}>
+      <div className="l8-styled-node">
         <button
           type="button"
           onClick={() => tryAddEdge('INDEX', 'INGEST')}
-          style={{
-            padding: '0.65rem 1.1rem',
-            borderRadius: '10px',
-            background: '#f43f5e',
-            color: '#f8fafc',
-            fontWeight: 700,
-            border: 'none',
-            cursor: 'pointer',
-          }}
+          className="l8-styled-node"
         >
           Simulate Illegal Cycle Edge (INDEX → INGEST)
         </button>
       </div>
 
       {cycleAlert && (
-        <p role="alert" data-testid="cycle-alert" style={{ color: '#f87171', marginTop: '0.85rem', fontWeight: 700 }}>
+        <p role="alert" data-testid="cycle-alert" className="l8-styled-node">
           {cycleAlert}
         </p>
       )}
@@ -1001,6 +953,7 @@ export async function recordMetricDatapointAction(
 """,
         "component_name": "HolographicRadar",
         "component_ts": """'use client';
+import './styles.css';
 
 import React, { useState } from 'react';
 
@@ -1025,44 +978,26 @@ export function HolographicRadar(): React.JSX.Element {
   return (
     <section
       aria-label="Declarative SVG Holographic Radar & KPI Engine"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-        gap: '1.5rem',
-      }}
+      className="l8-styled-node"
     >
       <div>
-        <span style={{ color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700 }}>
+        <span className="l8-styled-node">
           ZERO-DEPENDENCY POLAR SVG • TRIGONOMETRIC KPI MESH
         </span>
-        <h2 style={{ margin: '0.35rem 0', fontSize: '1.5rem', fontWeight: 800 }}>
-          Composite SLA Index: <span data-testid="composite-sla" style={{ color: '#4ade80' }}>{avgScore}%</span>
+        <h2 className="l8-styled-node">
+          Composite SLA Index: <span data-testid="composite-sla" className="l8-styled-node">{avgScore}%</span>
         </h2>
 
         <button
           type="button"
           onClick={() => setScores([100, 99, 98, 100, 99])}
-          style={{
-            marginTop: '1rem',
-            padding: '0.65rem 1.15rem',
-            borderRadius: '10px',
-            background: '#38bdf8',
-            color: '#090d16',
-            fontWeight: 700,
-            border: 'none',
-            cursor: 'pointer',
-          }}
+          className="l8-styled-node"
         >
           Boost Peak Canary Profile (99.2%)
         </button>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'center', background: '#0f172a', borderRadius: '14px', padding: '1rem' }}>
+      <div className="l8-styled-node">
         <svg width="220" height="220" viewBox="0 0 220 220" aria-label="Polar Radar Telemetry Chart">
           <circle cx="110" cy="110" r="80" fill="none" stroke="rgba(255,255,255,0.1)" />
           <circle cx="110" cy="110" r="50" fill="none" stroke="rgba(255,255,255,0.08)" />
@@ -1278,6 +1213,7 @@ export async function storeEncryptedEnvelopeAction(
 """,
         "component_name": "ZeroKnowledgeVault",
         "component_ts": """'use client';
+import './styles.css';
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
@@ -1346,66 +1282,41 @@ export function ZeroKnowledgeVault(): React.JSX.Element {
   return (
     <section
       aria-label="Zero-Knowledge WebCrypto AES-GCM Vault"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-        gap: '1.5rem',
-      }}
+      className="l8-styled-node"
     >
       <div>
-        <span style={{ color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700 }}>
+        <span className="l8-styled-node">
           PBKDF2 310K ITERATIONS • AES-GCM-256 ZERO-KNOWLEDGE ENCLAVE
         </span>
-        <h2 style={{ margin: '0.35rem 0 1rem', fontSize: '1.45rem', fontWeight: 800 }}>
+        <h2 className="l8-styled-node">
           Client-Side Cryptographic Vault
         </h2>
 
-        <label style={{ display: 'block', marginBottom: '0.75rem' }}>
-          <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Plaintext Secret (Never Leaves Browser):</span>
+        <label className="l8-styled-node">
+          <span className="l8-styled-node">Plaintext Secret (Never Leaves Browser):</span>
           <input
             type="text"
             aria-label="Plaintext Secret Input"
             value={secretInput}
             onChange={(e) => setSecretInput(e.target.value)}
-            style={{
-              width: '100%',
-              marginTop: '0.35rem',
-              padding: '0.65rem 0.9rem',
-              borderRadius: '8px',
-              background: '#1e293b',
-              color: '#f8fafc',
-              border: '1px solid rgba(255,255,255,0.15)',
-            }}
+            className="l8-styled-node"
           />
         </label>
 
         <button
           type="button"
           onClick={handleSeal}
-          style={{
-            padding: '0.65rem 1.15rem',
-            borderRadius: '10px',
-            background: '#38bdf8',
-            color: '#090d16',
-            fontWeight: 800,
-            border: 'none',
-            cursor: 'pointer',
-          }}
+          className="l8-styled-node"
         >
           Derive Key & Seal AES-GCM Ciphertext
         </button>
 
-        <div style={{ marginTop: '1rem', fontSize: '0.8rem', fontFamily: 'monospace', color: '#4ade80' }}>
+        <div className="l8-styled-node">
           Ciphertext: <span data-testid="ciphertext-hex">{sealedEnvelope.ciphertextHex}</span>
         </div>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', background: '#0f172a', borderRadius: '14px', padding: '1rem' }}>
+      <div className="l8-styled-node">
         <canvas ref={canvasRef} width={280} height={180} aria-label="3D Entropy Lattice" />
       </div>
     </section>

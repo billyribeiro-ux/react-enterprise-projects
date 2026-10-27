@@ -1,4 +1,5 @@
 'use client';
+import './styles.css';
 
 import React, { useDeferredValue, useMemo, useState } from 'react';
 
@@ -66,14 +67,7 @@ export function CommandPaletteEngine({
   return (
     <section
       aria-label="Zero-Latency Command Palette & Omni-Search Engine"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.12)',
-        maxWidth: '680px',
-      }}
+      className="l8-styled-node"
     >
       <input
         role="combobox"
@@ -88,22 +82,13 @@ export function CommandPaletteEngine({
           setActiveIndex(0);
         }}
         onKeyDown={handleKeyDown}
-        style={{
-          width: '100%',
-          padding: '0.9rem 1.1rem',
-          borderRadius: '12px',
-          background: '#1e293b',
-          color: '#f8fafc',
-          border: '1px solid #38bdf8',
-          fontSize: '1rem',
-          marginBottom: '1rem',
-        }}
+        className="l8-styled-node"
       />
 
       <ul
         id="omni-command-listbox"
         role="listbox"
-        style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}
+        className="l8-styled-node"
       >
         {ranked.map((cmd, idx) => {
           const isSelected = idx === activeIndex;
@@ -114,31 +99,16 @@ export function CommandPaletteEngine({
               role="option"
               aria-selected={isSelected}
               onClick={() => setLastExecuted(cmd.title)}
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '0.75rem 1rem',
-                borderRadius: '10px',
-                background: isSelected ? 'rgba(56, 189, 248, 0.18)' : 'rgba(15, 23, 42, 0.7)',
-                border: isSelected ? '1px solid #38bdf8' : '1px solid rgba(255,255,255,0.06)',
-                cursor: 'pointer',
-              }}
+              className="l8-styled-node"
             >
               <div>
-                <div style={{ fontWeight: 700 }}>{cmd.title}</div>
-                <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
+                <div className="l8-styled-node">{cmd.title}</div>
+                <div className="l8-styled-node">
                   {cmd.category} • Score: {cmd.score.toFixed(1)}
                 </div>
               </div>
               <kbd
-                style={{
-                  background: '#0f172a',
-                  padding: '0.25rem 0.55rem',
-                  borderRadius: '6px',
-                  fontSize: '0.75rem',
-                  color: '#38bdf8',
-                }}
+                className="l8-styled-node"
               >
                 {cmd.shortcut}
               </kbd>
@@ -147,7 +117,7 @@ export function CommandPaletteEngine({
         })}
       </ul>
 
-      <footer style={{ marginTop: '1rem', fontSize: '0.85rem', color: '#4ade80' }}>
+      <footer className="l8-styled-node">
         Last Executed Command: <strong data-testid="executed-cmd">{lastExecuted}</strong>
       </footer>
     </section>

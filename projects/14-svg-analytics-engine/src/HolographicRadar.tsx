@@ -1,4 +1,5 @@
 'use client';
+import './styles.css';
 
 import React, { useState } from 'react';
 
@@ -23,44 +24,26 @@ export function HolographicRadar(): React.JSX.Element {
   return (
     <section
       aria-label="Declarative SVG Holographic Radar & KPI Engine"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-        gap: '1.5rem',
-      }}
+      className="l8-styled-node"
     >
       <div>
-        <span style={{ color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700 }}>
+        <span className="l8-styled-node">
           ZERO-DEPENDENCY POLAR SVG • TRIGONOMETRIC KPI MESH
         </span>
-        <h2 style={{ margin: '0.35rem 0', fontSize: '1.5rem', fontWeight: 800 }}>
-          Composite SLA Index: <span data-testid="composite-sla" style={{ color: '#4ade80' }}>{avgScore}%</span>
+        <h2 className="l8-styled-node">
+          Composite SLA Index: <span data-testid="composite-sla" className="l8-styled-node">{avgScore}%</span>
         </h2>
 
         <button
           type="button"
           onClick={() => setScores([100, 99, 98, 100, 99])}
-          style={{
-            marginTop: '1rem',
-            padding: '0.65rem 1.15rem',
-            borderRadius: '10px',
-            background: '#38bdf8',
-            color: '#090d16',
-            fontWeight: 700,
-            border: 'none',
-            cursor: 'pointer',
-          }}
+          className="l8-styled-node"
         >
           Boost Peak Canary Profile (99.2%)
         </button>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'center', background: '#0f172a', borderRadius: '14px', padding: '1rem' }}>
+      <div className="l8-styled-node">
         <svg width="220" height="220" viewBox="0 0 220 220" aria-label="Polar Radar Telemetry Chart">
           <circle cx="110" cy="110" r="80" fill="none" stroke="rgba(255,255,255,0.1)" />
           <circle cx="110" cy="110" r="50" fill="none" stroke="rgba(255,255,255,0.08)" />

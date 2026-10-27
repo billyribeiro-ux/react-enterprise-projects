@@ -1,13 +1,176 @@
-@layer reset, tokens, components, utilities;
+@layer reset, tokens, layout, components, states, utilities;
 
 @layer tokens {
   :root {
     --surface-950: oklch(0.14 0.02 255);
     --surface-900: oklch(0.19 0.03 255);
+    --surface-850: oklch(0.24 0.03 255);
+    --border-subtle: oklch(0.76 0.14 230 / 0.18);
     --accent-cyan: oklch(0.76 0.14 230);
+    --accent-indigo: oklch(0.62 0.19 275);
     --accent-emerald: oklch(0.79 0.17 155);
+    --accent-rose: oklch(0.65 0.22 15);
     --text-primary: oklch(0.98 0.01 255);
     --text-muted: oklch(0.68 0.03 255);
+    --radius-lg: 20px;
+    --radius-md: 12px;
+    --radius-sm: 8px;
+  }
+}
+
+@layer layout {
+  section.l8-styled-node {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+    background: radial-gradient(circle at top right, oklch(0.24 0.07 275), var(--surface-950));
+    color: var(--text-primary);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-subtle);
+  }
+
+  header.l8-styled-node {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-block-end: 1.25rem;
+  }
+
+  div.l8-styled-node {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  [role="group"].l8-styled-node {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+}
+
+@layer components {
+  h2.l8-styled-node {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-block: 0.3rem;
+  }
+
+  h3.l8-styled-node {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    margin-block: 0 0.5rem;
+  }
+
+  span.l8-styled-node {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--accent-cyan);
+  }
+
+  code.l8-styled-node,
+  kbd.l8-styled-node {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    background: var(--surface-900);
+    color: var(--accent-emerald);
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--radius-sm);
+  }
+
+  button.l8-styled-node {
+    padding: 0.65rem 1.15rem;
+    border-radius: var(--radius-md);
+    background: var(--surface-850);
+    color: var(--text-primary);
+    font-weight: 700;
+    border: 1px solid var(--border-subtle);
+    cursor: pointer;
+    transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.18s ease;
+  }
+
+  button.l8-styled-node[type="submit"] {
+    background: var(--accent-cyan);
+    color: var(--surface-950);
+  }
+
+  input.l8-styled-node {
+    padding: 0.65rem 0.95rem;
+    border-radius: var(--radius-md);
+    background: var(--surface-900);
+    color: var(--text-primary);
+    border: 1px solid var(--border-subtle);
+  }
+
+  article.l8-styled-node,
+  li.l8-styled-node {
+    padding: 0.95rem 1.15rem;
+    border-radius: var(--radius-md);
+    background: var(--surface-900);
+    border: 1px solid var(--border-subtle);
+    list-style: none;
+  }
+
+  [dir="rtl"] article.l8-styled-node {
+    border-inline-start: 4px solid var(--accent-cyan);
+    padding-inline-start: 1.25rem;
+  }
+
+  svg.l8-styled-node {
+    width: 100%;
+    max-width: 600px;
+    background: var(--surface-900);
+    border-radius: var(--radius-md);
+    padding: 0.5rem;
+  }
+
+  [ data-testid="virtual-viewport" ].l8-styled-node {
+    height: 320px;
+    overflow-y: auto;
+    position: relative;
+    background: var(--surface-900);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-subtle);
+  }
+
+  [ data-testid="virtual-row" ].l8-styled-node {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 36px;
+    padding-inline: 1rem;
+    border-block-end: 1px solid var(--border-subtle);
+    font-family: ui-monospace, monospace;
+    font-size: 0.82rem;
+  }
+}
+
+@layer states {
+  button.l8-styled-node[aria-pressed="true"],
+  li.l8-styled-node[aria-selected="true"] {
+    border-color: var(--accent-cyan);
+    background: oklch(0.76 0.14 230 / 0.18);
+  }
+
+  button.l8-styled-node:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  p[role="alert"].l8-styled-node {
+    color: var(--accent-rose);
+    font-weight: 700;
+  }
+
+  p[role="status"].l8-styled-node,
+  footer.l8-styled-node {
+    color: var(--accent-emerald);
+    font-weight: 600;
   }
 }
 

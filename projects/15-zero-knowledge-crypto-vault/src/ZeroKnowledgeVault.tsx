@@ -1,4 +1,5 @@
 'use client';
+import './styles.css';
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
@@ -67,66 +68,41 @@ export function ZeroKnowledgeVault(): React.JSX.Element {
   return (
     <section
       aria-label="Zero-Knowledge WebCrypto AES-GCM Vault"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-        gap: '1.5rem',
-      }}
+      className="l8-styled-node"
     >
       <div>
-        <span style={{ color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700 }}>
+        <span className="l8-styled-node">
           PBKDF2 310K ITERATIONS • AES-GCM-256 ZERO-KNOWLEDGE ENCLAVE
         </span>
-        <h2 style={{ margin: '0.35rem 0 1rem', fontSize: '1.45rem', fontWeight: 800 }}>
+        <h2 className="l8-styled-node">
           Client-Side Cryptographic Vault
         </h2>
 
-        <label style={{ display: 'block', marginBottom: '0.75rem' }}>
-          <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Plaintext Secret (Never Leaves Browser):</span>
+        <label className="l8-styled-node">
+          <span className="l8-styled-node">Plaintext Secret (Never Leaves Browser):</span>
           <input
             type="text"
             aria-label="Plaintext Secret Input"
             value={secretInput}
             onChange={(e) => setSecretInput(e.target.value)}
-            style={{
-              width: '100%',
-              marginTop: '0.35rem',
-              padding: '0.65rem 0.9rem',
-              borderRadius: '8px',
-              background: '#1e293b',
-              color: '#f8fafc',
-              border: '1px solid rgba(255,255,255,0.15)',
-            }}
+            className="l8-styled-node"
           />
         </label>
 
         <button
           type="button"
           onClick={handleSeal}
-          style={{
-            padding: '0.65rem 1.15rem',
-            borderRadius: '10px',
-            background: '#38bdf8',
-            color: '#090d16',
-            fontWeight: 800,
-            border: 'none',
-            cursor: 'pointer',
-          }}
+          className="l8-styled-node"
         >
           Derive Key & Seal AES-GCM Ciphertext
         </button>
 
-        <div style={{ marginTop: '1rem', fontSize: '0.8rem', fontFamily: 'monospace', color: '#4ade80' }}>
+        <div className="l8-styled-node">
           Ciphertext: <span data-testid="ciphertext-hex">{sealedEnvelope.ciphertextHex}</span>
         </div>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', background: '#0f172a', borderRadius: '14px', padding: '1rem' }}>
+      <div className="l8-styled-node">
         <canvas ref={canvasRef} width={280} height={180} aria-label="3D Entropy Lattice" />
       </div>
     </section>

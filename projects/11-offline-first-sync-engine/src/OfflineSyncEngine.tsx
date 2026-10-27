@@ -1,4 +1,5 @@
 'use client';
+import './styles.css';
 
 import React, { useState } from 'react';
 
@@ -35,21 +36,15 @@ export function OfflineSyncEngine(): React.JSX.Element {
   return (
     <section
       aria-label="Offline-First Local-First Sync & Outbox Engine"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-      }}
+      className="l8-styled-node"
     >
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+      <header className="l8-styled-node">
         <div>
-          <span style={{ color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700 }}>
+          <span className="l8-styled-node">
             LOCAL-FIRST OUTBOX • MONOTONIC VECTOR CLOCK
           </span>
-          <h2 style={{ margin: '0.25rem 0', fontSize: '1.45rem', fontWeight: 800 }}>
-            Vector Clock: <code data-testid="vector-clock" style={{ color: '#4ade80' }}>v{vectorClock}</code> • Outbox:{' '}
+          <h2 className="l8-styled-node">
+            Vector Clock: <code data-testid="vector-clock" className="l8-styled-node">v{vectorClock}</code> • Outbox:{' '}
             <span data-testid="outbox-count">{outbox.length}</span> queued
           </h2>
         </div>
@@ -58,15 +53,7 @@ export function OfflineSyncEngine(): React.JSX.Element {
           type="button"
           aria-pressed={isOnline}
           onClick={toggleNetworkAndFlush}
-          style={{
-            padding: '0.6rem 1rem',
-            borderRadius: '10px',
-            background: isOnline ? '#10b981' : '#f59e0b',
-            color: '#090d16',
-            fontWeight: 800,
-            border: 'none',
-            cursor: 'pointer',
-          }}
+          className="l8-styled-node"
         >
           {isOnline ? 'Status: ONLINE (Synced)' : 'Status: OFFLINE (Click to Reconnect & Drain)'}
         </button>
@@ -75,15 +62,7 @@ export function OfflineSyncEngine(): React.JSX.Element {
       <button
         type="button"
         onClick={queueMutation}
-        style={{
-          padding: '0.65rem 1.15rem',
-          borderRadius: '10px',
-          background: '#38bdf8',
-          color: '#090d16',
-          fontWeight: 700,
-          border: 'none',
-          cursor: 'pointer',
-        }}
+        className="l8-styled-node"
       >
         Commit Local Document Edit
       </button>

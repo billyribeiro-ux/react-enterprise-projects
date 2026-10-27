@@ -1,4 +1,5 @@
 'use client';
+import './styles.css';
 
 import React, { useActionState, useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
@@ -47,29 +48,20 @@ export function BillingKpiDashboard({
   return (
     <section
       aria-label="Multi-Tenant SaaS Billing & Executive KPI Cockpit"
-      style={{
-        padding: '2rem',
-        background: 'linear-gradient(145deg, #090d16 0%, #111827 100%)',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.08)',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-        gap: '2rem',
-      }}
+      className="l8-styled-node"
     >
       <div>
-        <span style={{ color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase' }}>
+        <span className="l8-styled-node">
           Tenant: {tenantSlug} • OCC Lock v{activeVersion}
         </span>
-        <h2 style={{ fontSize: '1.6rem', fontWeight: 800, margin: '0.4rem 0 1rem' }}>
+        <h2 className="l8-styled-node">
           Executive ARR & Seat Allocation
         </h2>
 
         <div
           role="group"
           aria-label="Subscription Plan Tiers"
-          style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.65rem', marginBottom: '1.25rem' }}
+          className="l8-styled-node"
         >
           {TIERS.map((tier) => {
             const isSelected = selectedTier === tier.id;
@@ -79,18 +71,10 @@ export function BillingKpiDashboard({
                 type="button"
                 aria-pressed={isSelected}
                 onClick={() => setSelectedTier(tier.id)}
-                style={{
-                  padding: '0.85rem',
-                  borderRadius: '12px',
-                  border: isSelected ? '2px solid #38bdf8' : '1px solid rgba(255,255,255,0.12)',
-                  background: isSelected ? 'rgba(56, 189, 248, 0.14)' : 'rgba(15, 23, 42, 0.6)',
-                  color: '#f8fafc',
-                  cursor: 'pointer',
-                  textAlign: 'left',
-                }}
+                className="l8-styled-node"
               >
-                <div style={{ fontWeight: 700, fontSize: '0.85rem' }}>{tier.name}</div>
-                <div style={{ color: '#38bdf8', fontSize: '1.1rem', fontWeight: 800 }}>
+                <div className="l8-styled-node">{tier.name}</div>
+                <div className="l8-styled-node">
                   ${tier.pricePerSeat}/seat
                 </div>
               </button>
@@ -98,12 +82,12 @@ export function BillingKpiDashboard({
           })}
         </div>
 
-        <form action={formAction} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <form action={formAction} className="l8-styled-node">
           <input type="hidden" name="tenantSlug" value={tenantSlug} />
           <input type="hidden" name="planTier" value={selectedTier} />
           <input type="hidden" name="expectedVersion" value={activeVersion} />
 
-          <label style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', fontWeight: 600 }}>
+          <label className="l8-styled-node">
             <span>Provisioned Seats: {seats}</span>
             <input
               type="range"
@@ -118,22 +102,14 @@ export function BillingKpiDashboard({
           <button
             type="submit"
             disabled={isPending}
-            style={{
-              padding: '0.75rem 1.25rem',
-              borderRadius: '10px',
-              background: '#38bdf8',
-              color: '#090d16',
-              fontWeight: 700,
-              border: 'none',
-              cursor: 'pointer',
-            }}
+            className="l8-styled-node"
           >
             {isPending ? 'Verifying OCC Lock...' : 'Commit Multi-Tenant Seat Allocation'}
           </button>
         </form>
 
         {state.status === 'conflict' && (
-          <p role="alert" style={{ color: '#f87171', marginTop: '0.75rem' }}>
+          <p role="alert" className="l8-styled-node">
             {state.message}
           </p>
         )}
@@ -141,15 +117,7 @@ export function BillingKpiDashboard({
 
       {/* Hollywood Radial KPI Telemetry Gauge */}
       <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: 'rgba(15, 23, 42, 0.7)',
-          borderRadius: '16px',
-          padding: '1.5rem',
-        }}
+        className="l8-styled-node"
       >
         <svg width="150" height="150" viewBox="0 0 130 130" aria-label="Projected ARR Radial Gauge">
           <circle cx="65" cy="65" r="52" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="10" />
@@ -173,7 +141,7 @@ export function BillingKpiDashboard({
             ANNUAL RUN RATE
           </text>
         </svg>
-        <div data-testid="projected-mrr" style={{ marginTop: '0.75rem', fontWeight: 700, color: '#4ade80' }}>
+        <div data-testid="projected-mrr" className="l8-styled-node">
           MRR: ${projectedMrr.toLocaleString()}/mo • NRR: {activeTierMeta.nrr}%
         </div>
       </div>

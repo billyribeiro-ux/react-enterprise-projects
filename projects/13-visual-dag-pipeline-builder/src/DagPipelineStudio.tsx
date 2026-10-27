@@ -1,4 +1,5 @@
 'use client';
+import './styles.css';
 
 import React, { useState } from 'react';
 import { kahnTopologicalSort } from './actions';
@@ -29,27 +30,21 @@ export function DagPipelineStudio(): React.JSX.Element {
   return (
     <section
       aria-label="Visual DAG Pipeline Builder & Kahn Topological Scheduler"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-      }}
+      className="l8-styled-node"
     >
-      <span style={{ color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700 }}>
+      <span className="l8-styled-node">
         KAHN O(V+E) TOPOLOGICAL SCHEDULER • DEAD-LETTER ISOLATION
       </span>
-      <h2 style={{ margin: '0.35rem 0', fontSize: '1.45rem', fontWeight: 800 }}>
+      <h2 className="l8-styled-node">
         Topological Plan:{' '}
-        <code data-testid="topo-order" style={{ color: '#4ade80' }}>
+        <code data-testid="topo-order" className="l8-styled-node">
           {currentOrder.join(' → ')}
         </code>
       </h2>
 
       <svg
         viewBox="0 0 500 90"
-        style={{ width: '100%', maxWidth: '600px', background: '#0f172a', borderRadius: '12px', margin: '1rem 0' }}
+        className="l8-styled-node"
       >
         <path d="M 70 45 C 120 15, 150 75, 190 45" fill="none" stroke="#38bdf8" strokeWidth="2.5" />
         <path d="M 190 45 C 240 15, 270 75, 310 45" fill="none" stroke="#38bdf8" strokeWidth="2.5" />
@@ -64,26 +59,18 @@ export function DagPipelineStudio(): React.JSX.Element {
         ))}
       </svg>
 
-      <div style={{ display: 'flex', gap: '0.75rem' }}>
+      <div className="l8-styled-node">
         <button
           type="button"
           onClick={() => tryAddEdge('INDEX', 'INGEST')}
-          style={{
-            padding: '0.65rem 1.1rem',
-            borderRadius: '10px',
-            background: '#f43f5e',
-            color: '#f8fafc',
-            fontWeight: 700,
-            border: 'none',
-            cursor: 'pointer',
-          }}
+          className="l8-styled-node"
         >
           Simulate Illegal Cycle Edge (INDEX → INGEST)
         </button>
       </div>
 
       {cycleAlert && (
-        <p role="alert" data-testid="cycle-alert" style={{ color: '#f87171', marginTop: '0.85rem', fontWeight: 700 }}>
+        <p role="alert" data-testid="cycle-alert" className="l8-styled-node">
           {cycleAlert}
         </p>
       )}

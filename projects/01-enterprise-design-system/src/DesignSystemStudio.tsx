@@ -1,4 +1,5 @@
 'use client';
+import './styles.css';
 
 import React, {
   useActionState,
@@ -29,21 +30,13 @@ export function PrimitiveBox<E extends ElementType = 'button'>({
   as,
   variant = 'solid',
   children,
-  style,
   ...rest
 }: PolymorphicProps<E>): React.JSX.Element {
   const Component = as ?? 'button';
   return (
     <Component
       data-variant={variant}
-      style={{
-        padding: '0.65rem 1.25rem',
-        borderRadius: '10px',
-        fontWeight: 600,
-        border: '1px solid rgba(255,255,255,0.14)',
-        transition: 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
-        ...style,
-      }}
+      className="l8-styled-node"
       {...rest}
     >
       {children}
@@ -190,31 +183,16 @@ export function DesignSystemStudio({
   return (
     <section
       aria-label="Enterprise Design System & 3D Shader Studio"
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-        gap: '1.75rem',
-        padding: '2rem',
-        background: 'radial-gradient(circle at top right, #1e1b4b, #090d16)',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-      }}
+      className="l8-styled-node"
     >
-      <div ref={cardRef} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <div ref={cardRef} className="l8-styled-node">
         <header>
           <span
-            style={{
-              fontSize: '0.75rem',
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-              color: '#38bdf8',
-              fontWeight: 700,
-            }}
+            className="l8-styled-node"
           >
             OKLCH Cascade Layer + Three.js PBR Engine
           </span>
-          <h2 style={{ fontSize: '1.65rem', fontWeight: 800, margin: '0.25rem 0' }}>
+          <h2 className="l8-styled-node">
             {activeToken.name}
           </h2>
         </header>
@@ -222,7 +200,7 @@ export function DesignSystemStudio({
         <div
           role="group"
           aria-label="Design Token Selector"
-          style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}
+          className="l8-styled-node"
         >
           {initialTokens.map((tok, idx) => (
             <button
@@ -230,26 +208,18 @@ export function DesignSystemStudio({
               type="button"
               aria-pressed={idx === selectedIdx}
               onClick={() => setSelectedIdx(idx)}
-              style={{
-                padding: '0.4rem 0.75rem',
-                borderRadius: '8px',
-                border: idx === selectedIdx ? '1px solid #38bdf8' : '1px solid rgba(255,255,255,0.12)',
-                background: idx === selectedIdx ? 'rgba(56,189,248,0.15)' : 'rgba(15,23,42,0.6)',
-                color: '#f8fafc',
-                cursor: 'pointer',
-                fontSize: '0.8rem',
-              }}
+              className="l8-styled-node"
             >
               {tok.name}
             </button>
           ))}
         </div>
 
-        <form action={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
+        <form action={handleSubmit} className="l8-styled-node">
           <input type="hidden" name="name" value={activeToken.name} />
           <input type="hidden" name="roughness" value={activeToken.roughness} />
           <input type="hidden" name="metalness" value={activeToken.metalness} />
-          <label style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontWeight: 600 }}>
+          <label className="l8-styled-node">
             <span>Token Hex Value:</span>
             <input
               type="color"
@@ -260,23 +230,18 @@ export function DesignSystemStudio({
             />
             <code
               data-testid="optimistic-hex"
-              style={{
-                background: 'rgba(15,23,42,0.75)',
-                padding: '0.25rem 0.6rem',
-                borderRadius: '6px',
-                color: draftColor,
-              }}
+              className="l8-styled-node"
             >
               {isPending ? optimisticColor : draftColor}
             </code>
           </label>
 
-          <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+          <div className="l8-styled-node">
             <PrimitiveBox
               as="button"
               type="submit"
               disabled={isPending}
-              style={{ background: draftColor, color: '#090d16', cursor: 'pointer' }}
+              className="l8-styled-node"
             >
               {isPending ? 'Syncing Shader & Prisma...' : 'Commit Token & Pulse 3D Shader'}
             </PrimitiveBox>
@@ -284,7 +249,7 @@ export function DesignSystemStudio({
               as="a"
               href="#wcag-audit"
               variant="ghost"
-              style={{ color: '#e2e8f0', textDecoration: 'none' }}
+              className="l8-styled-node"
             >
               Verify APCA Contrast
             </PrimitiveBox>
@@ -292,12 +257,12 @@ export function DesignSystemStudio({
         </form>
 
         {state.status === 'success' && (
-          <p role="status" style={{ color: '#4ade80', fontSize: '0.85rem', margin: 0 }}>
+          <p role="status" className="l8-styled-node">
             Persisted {state.data.name} ({state.data.value}) to Prisma v6.
           </p>
         )}
         {state.status === 'error' && (
-          <p role="alert" style={{ color: '#f87171', fontSize: '0.85rem', margin: 0 }}>
+          <p role="alert" className="l8-styled-node">
             {state.message}
           </p>
         )}
@@ -307,13 +272,7 @@ export function DesignSystemStudio({
           viewBox="0 0 320 64"
           role="img"
           aria-label="Shader Frame Pacing Telemetry"
-          style={{
-            width: '100%',
-            height: '64px',
-            background: 'rgba(15,23,42,0.65)',
-            borderRadius: '10px',
-            padding: '6px',
-          }}
+          className="l8-styled-node"
         >
           <polyline
             fill="none"
@@ -328,16 +287,7 @@ export function DesignSystemStudio({
       </div>
 
       <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: 'rgba(15, 23, 42, 0.65)',
-          borderRadius: '16px',
-          padding: '1rem',
-          border: '1px solid rgba(56, 189, 248, 0.2)',
-        }}
+        className="l8-styled-node"
       >
         <canvas
           ref={canvasRef}
@@ -345,7 +295,7 @@ export function DesignSystemStudio({
           height={240}
           aria-label="Interactive 3D PBR Material Preview"
         />
-        <span style={{ fontSize: '0.75rem', color: '#94a3b8', marginTop: '0.5rem' }}>
+        <span className="l8-styled-node">
           Real-Time Three.js MeshPhysicalMaterial TorusKnot
         </span>
       </div>

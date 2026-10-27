@@ -21,6 +21,7 @@ def main() -> None:
 
     master_html = (ROOT / "index.html").read_text()
     assert ".slice(0, 800)" not in master_html, "Found forbidden code truncation in root index.html"
+    assert not re.search(r"<style\b|\bstyle\s*=", master_html, re.I), "Forbidden inline CSS in root index.html"
 
     total_files_verified = 0
     for p in data:
@@ -43,10 +44,11 @@ def main() -> None:
         if pid == "18-i18n-rtl-global-cms":
             assert "@@unique([slug, locale])" in schema, "Project 18 must use @@unique([slug, locale])"
 
-        # 3. Verify Zero `any` Types Across All TypeScript Files
+        # 3. Verify Zero `any` Types AND Zero Inline `style={{` Across All TypeScript/TSX Files
         for ts_file in pdir.rglob("*.ts*"):
             content = ts_file.read_text()
             assert not re.search(r":\s*any\b|as\s+any\b|<any>", content), f"Forbidden `any` in {ts_file}"
+            assert not re.search(r"\bstyle\s*=", content), f"Forbidden inline `style=` in {ts_file}"
             total_files_verified += 1
 
         # 4. Verify 100% Untruncated Byte-for-Byte Match Between Disk Source Files and Course Steps
@@ -65,16 +67,18 @@ def main() -> None:
         assert disk_comp in p["steps"][3]["code"], f"Step 4 component mismatch in {pid}"
         assert disk_unit in p["steps"][4]["code"] and disk_e2e in p["steps"][4]["code"], f"Step 5 tests mismatch in {pid}"
 
-        # 5. Verify Standalone Per-Project Course HTML Page (`projects/<id>/index.html`)
+        # 5. Verify Standalone Per-Project Course HTML Page (`projects/<id>/index.html`) Has Zero Inline CSS
         proj_html = (pdir / "index.html").read_text()
+        assert not re.search(r"<style\b|\bstyle\s*=", proj_html, re.I), f"Forbidden inline CSS in {pid}/index.html"
+        assert (pdir / "course.css").exists() and (pdir / "course.js").exists(), f"Missing external course.css/js in {pid}"
         assert html.escape(disk_comp) in proj_html, f"Untruncated component code missing from {pid}/index.html"
         assert html.escape(disk_actions) in proj_html, f"Untruncated actions code missing from {pid}/index.html"
         assert html.escape(disk_schema) in proj_html, f"Untruncated schema code missing from {pid}/index.html"
         total_files_verified += 1
 
     print(
-        f"✅ L8+ PRINCIPAL ENGINEER AUDIT PASSED: 20/20 Projects, 21/21 Interactive Course HTML Pages, "
-        f"{total_files_verified} Source & Course Artifacts Verified (0 `any` types, 0 truncations, 100% end-to-end match)."
+        f"✅ L8++ PRINCIPAL ENGINEER AUDIT PASSED: 20/20 Projects, 21/21 Interactive Course HTML Pages, "
+        f"{total_files_verified} Source & Course Artifacts Verified (0 `any`, 0 inline `<style>`/`style=`, 0 truncations, 100% external CSS)."
     )
 
 

@@ -1,4 +1,5 @@
 'use client';
+import './styles.css';
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
@@ -67,58 +68,32 @@ export function GlobeChaosControlPlane(): React.JSX.Element {
   return (
     <section
       aria-label="3D Global Edge Mesh & Chaos Engineering Control Plane"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-        gap: '1.5rem',
-      }}
+      className="l8-styled-node"
     >
       <div>
-        <span style={{ color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700 }}>
+        <span className="l8-styled-node">
           THREE.JS 3D GLOBAL MESH • AUTOMATED ANYCAST BGP FAILOVER
         </span>
-        <h2 style={{ margin: '0.35rem 0 1rem', fontSize: '1.45rem', fontWeight: 800 }}>
-          Global SLA: <span style={{ color: '#4ade80' }}>99.999% (5-Nines)</span>
+        <h2 className="l8-styled-node">
+          Global SLA: <span className="l8-styled-node">99.999% (5-Nines)</span>
         </h2>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+        <div className="l8-styled-node">
           {regions.map((r) => (
             <div
               key={r.code}
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '0.75rem 1rem',
-                borderRadius: '10px',
-                background: 'rgba(15, 23, 42, 0.75)',
-                border: r.healthy ? '1px solid rgba(74, 222, 128, 0.3)' : '1px solid #f43f5e',
-              }}
+              className="l8-styled-node"
             >
               <div>
                 <strong>{r.code}</strong> •{' '}
-                <span data-testid={`load-${r.code}`} style={{ color: r.healthy ? '#4ade80' : '#f87171' }}>
+                <span data-testid={`load-${r.code}`} className="l8-styled-node">
                   {r.trafficPct}% Load
                 </span>
               </div>
               <button
                 type="button"
                 onClick={() => partitionRegion(r.code)}
-                style={{
-                  padding: '0.4rem 0.75rem',
-                  borderRadius: '6px',
-                  background: '#f43f5e',
-                  color: '#f8fafc',
-                  fontWeight: 700,
-                  border: 'none',
-                  cursor: 'pointer',
-                  fontSize: '0.75rem',
-                }}
+                className="l8-styled-node"
               >
                 Inject BGP Partition ({r.code})
               </button>
@@ -127,7 +102,7 @@ export function GlobeChaosControlPlane(): React.JSX.Element {
         </div>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', background: '#0f172a', borderRadius: '14px', padding: '1rem' }}>
+      <div className="l8-styled-node">
         <canvas ref={canvasRef} width={320} height={220} aria-label="3D Global Edge Mesh Canvas" />
       </div>
     </section>

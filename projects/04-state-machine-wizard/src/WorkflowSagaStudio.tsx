@@ -1,4 +1,5 @@
 'use client';
+import './styles.css';
 
 import React, { useState } from 'react';
 import type { SagaState } from './actions';
@@ -36,32 +37,19 @@ export function WorkflowSagaStudio(): React.JSX.Element {
   return (
     <section
       aria-label="Distributed Saga Workflow & State Machine Studio"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-      }}
+      className="l8-styled-node"
     >
-      <span style={{ color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700 }}>
+      <span className="l8-styled-node">
         DETERMINISTIC FINITE AUTOMATON • IDEMPOTENT SAGA CHECKPOINTS
       </span>
-      <h2 style={{ fontSize: '1.5rem', fontWeight: 800, margin: '0.35rem 0 1.25rem' }}>
-        Current DFA State: <code data-testid="dfa-state" style={{ color: '#4ade80' }}>{currentState}</code>
+      <h2 className="l8-styled-node">
+        Current DFA State: <code data-testid="dfa-state" className="l8-styled-node">{currentState}</code>
       </h2>
 
       {/* Directed SVG State Machine Graph */}
       <svg
         viewBox="0 0 520 110"
-        style={{
-          width: '100%',
-          maxWidth: '640px',
-          background: 'rgba(15,23,42,0.75)',
-          borderRadius: '14px',
-          padding: '0.75rem',
-          marginBottom: '1.25rem',
-        }}
+        className="l8-styled-node"
       >
         <line x1="60" y1="50" x2="450" y2="50" stroke="rgba(255,255,255,0.15)" strokeWidth="3" />
         {STATES.map((node) => {
@@ -91,40 +79,25 @@ export function WorkflowSagaStudio(): React.JSX.Element {
         })}
       </svg>
 
-      <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '1rem' }}>
+      <div className="l8-styled-node">
         <button
           type="button"
           onClick={handleAdvance}
           disabled={currentState === 'PROVISIONED'}
-          style={{
-            padding: '0.65rem 1.25rem',
-            borderRadius: '10px',
-            background: currentState === 'PROVISIONED' ? '#334155' : '#38bdf8',
-            color: '#090d16',
-            fontWeight: 700,
-            border: 'none',
-            cursor: 'pointer',
-          }}
+          className="l8-styled-node"
         >
           Commit Next Idempotent Checkpoint →
         </button>
         <button
           type="button"
           onClick={handleReset}
-          style={{
-            padding: '0.65rem 1rem',
-            borderRadius: '10px',
-            background: 'transparent',
-            color: '#e2e8f0',
-            border: '1px solid rgba(255,255,255,0.2)',
-            cursor: 'pointer',
-          }}
+          className="l8-styled-node"
         >
           Compensate & Reset Saga
         </button>
       </div>
 
-      <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>
+      <div className="l8-styled-node">
         Audit Log: {history.join(' • ')}
       </div>
     </section>

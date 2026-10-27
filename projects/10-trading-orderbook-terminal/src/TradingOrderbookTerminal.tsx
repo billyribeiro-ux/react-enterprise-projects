@@ -1,4 +1,5 @@
 'use client';
+import './styles.css';
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
@@ -80,66 +81,41 @@ export function TradingOrderbookTerminal(): React.JSX.Element {
   return (
     <section
       aria-label="Algorithmic Trading Orderbook & 3D Market Depth Terminal"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-        gap: '1.5rem',
-      }}
+      className="l8-styled-node"
     >
       <div>
-        <span style={{ color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700 }}>
+        <span className="l8-styled-node">
           ZERO-ALLOCATION FLOAT64 RING BUFFER • 120FPS RAF COMMIT
         </span>
-        <h2 style={{ margin: '0.35rem 0', fontSize: '1.5rem', fontWeight: 800 }}>
+        <h2 className="l8-styled-node">
           BTC-USD-PERP:{' '}
-          <span data-testid="mid-price" style={{ color: '#4ade80', fontFamily: 'monospace' }}>
+          <span data-testid="mid-price" className="l8-styled-node">
             ${midPrice.toFixed(2)}
           </span>
         </h2>
-        <p style={{ color: '#94a3b8', fontSize: '0.85rem' }}>
+        <p className="l8-styled-node">
           Ring Buffer Fills Processed: <strong data-testid="fills-count">{fillsCount}</strong>
         </p>
 
-        <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1rem' }}>
+        <div className="l8-styled-node">
           <button
             type="button"
             onClick={() => ingestHighFreqTick(12.5)}
-            style={{
-              padding: '0.65rem 1.1rem',
-              borderRadius: '10px',
-              background: '#10b981',
-              color: '#090d16',
-              fontWeight: 800,
-              border: 'none',
-              cursor: 'pointer',
-            }}
+            className="l8-styled-node"
           >
             Sweep Ask (+12.50)
           </button>
           <button
             type="button"
             onClick={() => ingestHighFreqTick(-10.0)}
-            style={{
-              padding: '0.65rem 1.1rem',
-              borderRadius: '10px',
-              background: '#f43f5e',
-              color: '#f8fafc',
-              fontWeight: 800,
-              border: 'none',
-              cursor: 'pointer',
-            }}
+            className="l8-styled-node"
           >
             Hit Bid (-10.00)
           </button>
         </div>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', background: '#0f172a', borderRadius: '14px', padding: '1rem' }}>
+      <div className="l8-styled-node">
         <canvas ref={canvasRef} width={320} height={200} aria-label="3D Liquidity Depth Surface" />
       </div>
     </section>

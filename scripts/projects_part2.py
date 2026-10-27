@@ -172,6 +172,7 @@ export async function ingestTelemetryEventAction(
 """,
         "component_name": "VirtualizedTelemetryGrid",
         "component_ts": """'use client';
+import './styles.css';
 
 import React, { useMemo, useState } from 'react';
 
@@ -206,20 +207,14 @@ export function VirtualizedTelemetryGrid(): React.JSX.Element {
   return (
     <section
       aria-label="100k-Row Virtualized Telemetry Explorer"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-      }}
+      className="l8-styled-node"
     >
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+      <header className="l8-styled-node">
         <div>
-          <span style={{ color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700 }}>
+          <span className="l8-styled-node">
             100,000 LOG STREAMS • CONSTANT O(1) DOM FOOTPRINT
           </span>
-          <h2 style={{ margin: '0.25rem 0', fontSize: '1.4rem', fontWeight: 800 }}>
+          <h2 className="l8-styled-node">
             Windowed Slice: Rows {startIndex.toLocaleString()} – {endIndex.toLocaleString()}
           </h2>
         </div>
@@ -228,15 +223,7 @@ export function VirtualizedTelemetryGrid(): React.JSX.Element {
           type="button"
           aria-pressed={severityFilter === 'ERROR'}
           onClick={() => setSeverityFilter((prev) => (prev === 'ALL' ? 'ERROR' : 'ALL'))}
-          style={{
-            padding: '0.5rem 0.9rem',
-            borderRadius: '8px',
-            background: severityFilter === 'ERROR' ? '#ef4444' : '#1e293b',
-            color: '#f8fafc',
-            border: '1px solid rgba(255,255,255,0.15)',
-            cursor: 'pointer',
-            fontWeight: 700,
-          }}
+          className="l8-styled-node"
         >
           {severityFilter === 'ERROR' ? 'Showing ERROR Only' : 'Filter ERROR Traces'}
         </button>
@@ -245,41 +232,20 @@ export function VirtualizedTelemetryGrid(): React.JSX.Element {
       <div
         data-testid="virtual-viewport"
         onScroll={(e) => setScrollTop(e.currentTarget.scrollTop)}
-        style={{
-          height: `${VIEWPORT_HEIGHT}px`,
-          overflowY: 'auto',
-          position: 'relative',
-          background: '#0f172a',
-          borderRadius: '12px',
-          border: '1px solid rgba(56, 189, 248, 0.2)',
-        }}
+        className="l8-styled-node"
       >
-        <div style={{ height: `${TOTAL_ROWS * ROW_HEIGHT}px`, position: 'relative' }}>
+        <div className="l8-styled-node">
           {visibleRows.map((row) => (
             <div
               key={row.traceId}
               data-testid="virtual-row"
-              style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                height: `${ROW_HEIGHT}px`,
-                transform: `translate3d(0, ${row.index * ROW_HEIGHT}px, 0)`,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: '0 1rem',
-                borderBottom: '1px solid rgba(255,255,255,0.04)',
-                fontFamily: 'monospace',
-                fontSize: '0.82rem',
-              }}
+              className="l8-styled-node"
             >
               <span>#{row.index} • {row.traceId}</span>
-              <span style={{ color: row.severity === 'ERROR' ? '#f87171' : '#38bdf8', fontWeight: 700 }}>
+              <span className="l8-styled-node">
                 {row.severity}
               </span>
-              <span style={{ color: '#4ade80' }}>{row.latency}</span>
+              <span className="l8-styled-node">{row.latency}</span>
             </div>
           ))}
         </div>
@@ -477,6 +443,7 @@ export async function commitSpatialTransformAction(
 """,
         "component_name": "SpatialCanvasStudio",
         "component_ts": """'use client';
+import './styles.css';
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
@@ -581,62 +548,38 @@ export function SpatialCanvasStudio(): React.JSX.Element {
   return (
     <section
       aria-label="Real-Time Collaborative 3D Spatial Canvas"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-        gap: '1.5rem',
-      }}
+      className="l8-styled-node"
     >
       <div>
-        <span style={{ color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700 }}>
+        <span className="l8-styled-node">
           LWW-ELEMENT-SET CRDT • LAMPORT LOGICAL CLOCK
         </span>
-        <h2 style={{ fontSize: '1.45rem', fontWeight: 800, margin: '0.35rem 0 1rem' }}>
+        <h2 className="l8-styled-node">
           {node.label}
         </h2>
-        <p data-testid="spatial-coords" style={{ fontFamily: 'monospace', color: '#4ade80' }}>
+        <p data-testid="spatial-coords" className="l8-styled-node">
           Vector3({node.x}, {node.y}, {node.z}) • Lamport Clock: v{node.lamportTs} ({node.peerId})
         </p>
 
-        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginTop: '1rem' }}>
+        <div className="l8-styled-node">
           <button
             type="button"
             onClick={() => applyTransform(0.5, 0.25, node.lamportTs + 1, 'peer-beta')}
-            style={{
-              padding: '0.65rem 1rem',
-              borderRadius: '10px',
-              background: '#38bdf8',
-              color: '#090d16',
-              fontWeight: 700,
-              border: 'none',
-              cursor: 'pointer',
-            }}
+            className="l8-styled-node"
           >
             Broadcast Valid Peer Transform (ts+1)
           </button>
           <button
             type="button"
             onClick={() => applyTransform(99, 99, node.lamportTs - 1, 'peer-stale')}
-            style={{
-              padding: '0.65rem 1rem',
-              borderRadius: '10px',
-              background: '#1e293b',
-              color: '#94a3b8',
-              border: '1px solid rgba(255,255,255,0.15)',
-              cursor: 'pointer',
-            }}
+            className="l8-styled-node"
           >
             Simulate Stale Packet (ts-1)
           </button>
         </div>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', background: '#0f172a', borderRadius: '14px', padding: '1rem' }}>
+      <div className="l8-styled-node">
         <canvas ref={canvasRef} width={340} height={220} aria-label="3D Spatial Mesh Canvas" />
       </div>
     </section>
@@ -814,6 +757,7 @@ export async function submitCopilotPromptAction(
 """,
         "component_name": "AiCopilotWorkspace",
         "component_ts": """'use client';
+import './styles.css';
 
 import React, { useOptimistic, useState, useTransition } from 'react';
 
@@ -869,19 +813,13 @@ export function AiCopilotWorkspace(): React.JSX.Element {
   return (
     <section
       aria-label="Streaming AI Copilot & Generative UI Workspace"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-      }}
+      className="l8-styled-node"
     >
-      <header style={{ marginBottom: '1rem' }}>
-        <span style={{ color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700 }}>
+      <header className="l8-styled-node">
+        <span className="l8-styled-node">
           REACT 19 USEOPTIMISTIC STREAM • GENERATIVE SERVER ARTIFACTS
         </span>
-        <h2 style={{ margin: '0.25rem 0', fontSize: '1.45rem', fontWeight: 800 }}>
+        <h2 className="l8-styled-node">
           Agentic Architecture Copilot
         </h2>
       </header>
@@ -890,62 +828,31 @@ export function AiCopilotWorkspace(): React.JSX.Element {
         role="log"
         aria-live="polite"
         data-testid="copilot-log"
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '0.75rem',
-          marginBottom: '1.25rem',
-          padding: '1rem',
-          background: '#0f172a',
-          borderRadius: '12px',
-        }}
+        className="l8-styled-node"
       >
         {optimisticMessages.map((msg) => (
           <div
             key={msg.id}
-            style={{
-              alignSelf: msg.role === 'user' ? 'flex-end' : 'flex-start',
-              background: msg.role === 'user' ? '#38bdf8' : '#1e293b',
-              color: msg.role === 'user' ? '#090d16' : '#f8fafc',
-              padding: '0.7rem 1rem',
-              borderRadius: '10px',
-              fontWeight: msg.role === 'user' ? 700 : 500,
-              maxWidth: '85%',
-            }}
+            className="l8-styled-node"
           >
             {msg.content}
           </div>
         ))}
       </div>
 
-      <form onSubmit={handleSend} style={{ display: 'flex', gap: '0.75rem' }}>
+      <form onSubmit={handleSend} className="l8-styled-node">
         <input
           type="text"
           aria-label="Copilot Prompt Input"
           placeholder="Ask Copilot to synthesize an architecture diagram..."
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
-          style={{
-            flex: 1,
-            padding: '0.75rem 1rem',
-            borderRadius: '10px',
-            background: '#1e293b',
-            color: '#f8fafc',
-            border: '1px solid rgba(255,255,255,0.15)',
-          }}
+          className="l8-styled-node"
         />
         <button
           type="submit"
           disabled={isPending}
-          style={{
-            padding: '0.75rem 1.25rem',
-            borderRadius: '10px',
-            background: '#38bdf8',
-            color: '#090d16',
-            fontWeight: 700,
-            border: 'none',
-            cursor: 'pointer',
-          }}
+          className="l8-styled-node"
         >
           Stream Synthesis
         </button>
@@ -1163,6 +1070,7 @@ export async function updateRoleBitmaskAction(
 """,
         "component_name": "ZeroTrustRbacConsole",
         "component_ts": """'use client';
+import './styles.css';
 
 import React, { useState } from 'react';
 
@@ -1191,27 +1099,21 @@ export function ZeroTrustRbacConsole({
   return (
     <section
       aria-label="Zero-Trust RBAC/ABAC IAM & Security Policy Console"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-      }}
+      className="l8-styled-node"
     >
-      <header style={{ marginBottom: '1.25rem' }}>
-        <span style={{ color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700 }}>
+      <header className="l8-styled-node">
+        <span className="l8-styled-node">
           O(1) BITWISE CAPABILITY MATRIX • CRYPTOGRAPHIC AUDIT LEDGER
         </span>
-        <h2 style={{ margin: '0.25rem 0', fontSize: '1.5rem', fontWeight: 800 }}>
+        <h2 className="l8-styled-node">
           Active Capability Mask:{' '}
-          <code data-testid="binary-mask" style={{ color: '#4ade80' }}>
+          <code data-testid="binary-mask" className="l8-styled-node">
             0b{mask.toString(2).padStart(4, '0')} ({mask})
           </code>
         </h2>
       </header>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '0.85rem' }}>
+      <div className="l8-styled-node">
         {CAPABILITIES.map((cap) => {
           const granted = hasCapability(mask, cap.bit);
           return (
@@ -1220,24 +1122,12 @@ export function ZeroTrustRbacConsole({
               type="button"
               aria-pressed={granted}
               onClick={() => toggleBit(cap.bit)}
-              style={{
-                padding: '1rem',
-                borderRadius: '12px',
-                textAlign: 'left',
-                border: granted ? '1px solid #4ade80' : '1px solid rgba(255,255,255,0.12)',
-                background: granted ? 'rgba(74, 222, 128, 0.12)' : 'rgba(15, 23, 42, 0.7)',
-                color: '#f8fafc',
-                cursor: 'pointer',
-              }}
+              className="l8-styled-node"
             >
-              <div style={{ fontWeight: 700, fontSize: '0.9rem' }}>{cap.code}</div>
-              <div style={{ fontSize: '0.75rem', color: '#94a3b8', margin: '0.25rem 0' }}>{cap.label}</div>
+              <div className="l8-styled-node">{cap.code}</div>
+              <div className="l8-styled-node">{cap.label}</div>
               <span
-                style={{
-                  fontSize: '0.72rem',
-                  fontWeight: 800,
-                  color: granted ? '#4ade80' : '#f87171',
-                }}
+                className="l8-styled-node"
               >
                 {granted ? 'GRANTED (ALLOW)' : 'DENIED (ZERO-TRUST)'}
               </span>
@@ -1428,6 +1318,7 @@ export async function executeLimitOrderAction(
 """,
         "component_name": "TradingOrderbookTerminal",
         "component_ts": """'use client';
+import './styles.css';
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
@@ -1509,66 +1400,41 @@ export function TradingOrderbookTerminal(): React.JSX.Element {
   return (
     <section
       aria-label="Algorithmic Trading Orderbook & 3D Market Depth Terminal"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-        gap: '1.5rem',
-      }}
+      className="l8-styled-node"
     >
       <div>
-        <span style={{ color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700 }}>
+        <span className="l8-styled-node">
           ZERO-ALLOCATION FLOAT64 RING BUFFER • 120FPS RAF COMMIT
         </span>
-        <h2 style={{ margin: '0.35rem 0', fontSize: '1.5rem', fontWeight: 800 }}>
+        <h2 className="l8-styled-node">
           BTC-USD-PERP:{' '}
-          <span data-testid="mid-price" style={{ color: '#4ade80', fontFamily: 'monospace' }}>
+          <span data-testid="mid-price" className="l8-styled-node">
             ${midPrice.toFixed(2)}
           </span>
         </h2>
-        <p style={{ color: '#94a3b8', fontSize: '0.85rem' }}>
+        <p className="l8-styled-node">
           Ring Buffer Fills Processed: <strong data-testid="fills-count">{fillsCount}</strong>
         </p>
 
-        <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1rem' }}>
+        <div className="l8-styled-node">
           <button
             type="button"
             onClick={() => ingestHighFreqTick(12.5)}
-            style={{
-              padding: '0.65rem 1.1rem',
-              borderRadius: '10px',
-              background: '#10b981',
-              color: '#090d16',
-              fontWeight: 800,
-              border: 'none',
-              cursor: 'pointer',
-            }}
+            className="l8-styled-node"
           >
             Sweep Ask (+12.50)
           </button>
           <button
             type="button"
             onClick={() => ingestHighFreqTick(-10.0)}
-            style={{
-              padding: '0.65rem 1.1rem',
-              borderRadius: '10px',
-              background: '#f43f5e',
-              color: '#f8fafc',
-              fontWeight: 800,
-              border: 'none',
-              cursor: 'pointer',
-            }}
+            className="l8-styled-node"
           >
             Hit Bid (-10.00)
           </button>
         </div>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', background: '#0f172a', borderRadius: '14px', padding: '1rem' }}>
+      <div className="l8-styled-node">
         <canvas ref={canvasRef} width={320} height={200} aria-label="3D Liquidity Depth Surface" />
       </div>
     </section>

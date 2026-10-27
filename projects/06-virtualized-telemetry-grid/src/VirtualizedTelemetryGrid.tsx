@@ -1,4 +1,5 @@
 'use client';
+import './styles.css';
 
 import React, { useMemo, useState } from 'react';
 
@@ -33,20 +34,14 @@ export function VirtualizedTelemetryGrid(): React.JSX.Element {
   return (
     <section
       aria-label="100k-Row Virtualized Telemetry Explorer"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-      }}
+      className="l8-styled-node"
     >
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+      <header className="l8-styled-node">
         <div>
-          <span style={{ color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700 }}>
+          <span className="l8-styled-node">
             100,000 LOG STREAMS • CONSTANT O(1) DOM FOOTPRINT
           </span>
-          <h2 style={{ margin: '0.25rem 0', fontSize: '1.4rem', fontWeight: 800 }}>
+          <h2 className="l8-styled-node">
             Windowed Slice: Rows {startIndex.toLocaleString()} – {endIndex.toLocaleString()}
           </h2>
         </div>
@@ -55,15 +50,7 @@ export function VirtualizedTelemetryGrid(): React.JSX.Element {
           type="button"
           aria-pressed={severityFilter === 'ERROR'}
           onClick={() => setSeverityFilter((prev) => (prev === 'ALL' ? 'ERROR' : 'ALL'))}
-          style={{
-            padding: '0.5rem 0.9rem',
-            borderRadius: '8px',
-            background: severityFilter === 'ERROR' ? '#ef4444' : '#1e293b',
-            color: '#f8fafc',
-            border: '1px solid rgba(255,255,255,0.15)',
-            cursor: 'pointer',
-            fontWeight: 700,
-          }}
+          className="l8-styled-node"
         >
           {severityFilter === 'ERROR' ? 'Showing ERROR Only' : 'Filter ERROR Traces'}
         </button>
@@ -72,41 +59,20 @@ export function VirtualizedTelemetryGrid(): React.JSX.Element {
       <div
         data-testid="virtual-viewport"
         onScroll={(e) => setScrollTop(e.currentTarget.scrollTop)}
-        style={{
-          height: `${VIEWPORT_HEIGHT}px`,
-          overflowY: 'auto',
-          position: 'relative',
-          background: '#0f172a',
-          borderRadius: '12px',
-          border: '1px solid rgba(56, 189, 248, 0.2)',
-        }}
+        className="l8-styled-node"
       >
-        <div style={{ height: `${TOTAL_ROWS * ROW_HEIGHT}px`, position: 'relative' }}>
+        <div className="l8-styled-node">
           {visibleRows.map((row) => (
             <div
               key={row.traceId}
               data-testid="virtual-row"
-              style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                height: `${ROW_HEIGHT}px`,
-                transform: `translate3d(0, ${row.index * ROW_HEIGHT}px, 0)`,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: '0 1rem',
-                borderBottom: '1px solid rgba(255,255,255,0.04)',
-                fontFamily: 'monospace',
-                fontSize: '0.82rem',
-              }}
+              className="l8-styled-node"
             >
               <span>#{row.index} • {row.traceId}</span>
-              <span style={{ color: row.severity === 'ERROR' ? '#f87171' : '#38bdf8', fontWeight: 700 }}>
+              <span className="l8-styled-node">
                 {row.severity}
               </span>
-              <span style={{ color: '#4ade80' }}>{row.latency}</span>
+              <span className="l8-styled-node">{row.latency}</span>
             </div>
           ))}
         </div>

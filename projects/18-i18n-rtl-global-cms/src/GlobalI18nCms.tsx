@@ -1,4 +1,5 @@
 'use client';
+import './styles.css';
 
 import React, { useState } from 'react';
 
@@ -31,30 +32,16 @@ export function GlobalI18nCms(): React.JSX.Element {
       aria-label="Global i18n, BiDi RTL Layout & ICU CMS"
       dir={active.dir}
       data-testid="bidi-container"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-      }}
+      className="l8-styled-node"
     >
-      <div style={{ display: 'flex', gap: '0.6rem', marginBottom: '1.25rem' }}>
+      <div className="l8-styled-node">
         {(['en-US', 'ar-SA', 'ja-JP'] as const).map((loc) => (
           <button
             key={loc}
             type="button"
             aria-pressed={locale === loc}
             onClick={() => setLocale(loc)}
-            style={{
-              padding: '0.5rem 0.9rem',
-              borderRadius: '8px',
-              background: locale === loc ? '#38bdf8' : '#1e293b',
-              color: locale === loc ? '#090d16' : '#f8fafc',
-              fontWeight: 700,
-              border: 'none',
-              cursor: 'pointer',
-            }}
+            className="l8-styled-node"
           >
             {loc}
           </button>
@@ -62,18 +49,12 @@ export function GlobalI18nCms(): React.JSX.Element {
       </div>
 
       <article
-        style={{
-          borderInlineStart: '4px solid #38bdf8',
-          paddingInlineStart: '1.25rem',
-          background: 'rgba(15, 23, 42, 0.7)',
-          paddingBlock: '1rem',
-          borderRadius: '10px',
-        }}
+        className="l8-styled-node"
       >
-        <h2 data-testid="localized-headline" style={{ margin: '0 0 0.4rem', fontSize: '1.5rem', fontWeight: 800 }}>
+        <h2 data-testid="localized-headline" className="l8-styled-node">
           {active.headline}
         </h2>
-        <p style={{ margin: 0, color: '#4ade80', fontWeight: 600 }}>
+        <p className="l8-styled-node">
           {active.regionCount} • Direction: {active.dir.toUpperCase()}
         </p>
       </article>

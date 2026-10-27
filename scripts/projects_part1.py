@@ -239,6 +239,7 @@ export async function updateDesignTokenAction(
 """,
         "component_name": "DesignSystemStudio",
         "component_ts": """'use client';
+import './styles.css';
 
 import React, {
   useActionState,
@@ -269,21 +270,13 @@ export function PrimitiveBox<E extends ElementType = 'button'>({
   as,
   variant = 'solid',
   children,
-  style,
   ...rest
 }: PolymorphicProps<E>): React.JSX.Element {
   const Component = as ?? 'button';
   return (
     <Component
       data-variant={variant}
-      style={{
-        padding: '0.65rem 1.25rem',
-        borderRadius: '10px',
-        fontWeight: 600,
-        border: '1px solid rgba(255,255,255,0.14)',
-        transition: 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
-        ...style,
-      }}
+      className="l8-styled-node"
       {...rest}
     >
       {children}
@@ -430,31 +423,16 @@ export function DesignSystemStudio({
   return (
     <section
       aria-label="Enterprise Design System & 3D Shader Studio"
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-        gap: '1.75rem',
-        padding: '2rem',
-        background: 'radial-gradient(circle at top right, #1e1b4b, #090d16)',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-      }}
+      className="l8-styled-node"
     >
-      <div ref={cardRef} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <div ref={cardRef} className="l8-styled-node">
         <header>
           <span
-            style={{
-              fontSize: '0.75rem',
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-              color: '#38bdf8',
-              fontWeight: 700,
-            }}
+            className="l8-styled-node"
           >
             OKLCH Cascade Layer + Three.js PBR Engine
           </span>
-          <h2 style={{ fontSize: '1.65rem', fontWeight: 800, margin: '0.25rem 0' }}>
+          <h2 className="l8-styled-node">
             {activeToken.name}
           </h2>
         </header>
@@ -462,7 +440,7 @@ export function DesignSystemStudio({
         <div
           role="group"
           aria-label="Design Token Selector"
-          style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}
+          className="l8-styled-node"
         >
           {initialTokens.map((tok, idx) => (
             <button
@@ -470,26 +448,18 @@ export function DesignSystemStudio({
               type="button"
               aria-pressed={idx === selectedIdx}
               onClick={() => setSelectedIdx(idx)}
-              style={{
-                padding: '0.4rem 0.75rem',
-                borderRadius: '8px',
-                border: idx === selectedIdx ? '1px solid #38bdf8' : '1px solid rgba(255,255,255,0.12)',
-                background: idx === selectedIdx ? 'rgba(56,189,248,0.15)' : 'rgba(15,23,42,0.6)',
-                color: '#f8fafc',
-                cursor: 'pointer',
-                fontSize: '0.8rem',
-              }}
+              className="l8-styled-node"
             >
               {tok.name}
             </button>
           ))}
         </div>
 
-        <form action={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
+        <form action={handleSubmit} className="l8-styled-node">
           <input type="hidden" name="name" value={activeToken.name} />
           <input type="hidden" name="roughness" value={activeToken.roughness} />
           <input type="hidden" name="metalness" value={activeToken.metalness} />
-          <label style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontWeight: 600 }}>
+          <label className="l8-styled-node">
             <span>Token Hex Value:</span>
             <input
               type="color"
@@ -500,23 +470,18 @@ export function DesignSystemStudio({
             />
             <code
               data-testid="optimistic-hex"
-              style={{
-                background: 'rgba(15,23,42,0.75)',
-                padding: '0.25rem 0.6rem',
-                borderRadius: '6px',
-                color: draftColor,
-              }}
+              className="l8-styled-node"
             >
               {isPending ? optimisticColor : draftColor}
             </code>
           </label>
 
-          <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+          <div className="l8-styled-node">
             <PrimitiveBox
               as="button"
               type="submit"
               disabled={isPending}
-              style={{ background: draftColor, color: '#090d16', cursor: 'pointer' }}
+              className="l8-styled-node"
             >
               {isPending ? 'Syncing Shader & Prisma...' : 'Commit Token & Pulse 3D Shader'}
             </PrimitiveBox>
@@ -524,7 +489,7 @@ export function DesignSystemStudio({
               as="a"
               href="#wcag-audit"
               variant="ghost"
-              style={{ color: '#e2e8f0', textDecoration: 'none' }}
+              className="l8-styled-node"
             >
               Verify APCA Contrast
             </PrimitiveBox>
@@ -532,12 +497,12 @@ export function DesignSystemStudio({
         </form>
 
         {state.status === 'success' && (
-          <p role="status" style={{ color: '#4ade80', fontSize: '0.85rem', margin: 0 }}>
+          <p role="status" className="l8-styled-node">
             Persisted {state.data.name} ({state.data.value}) to Prisma v6.
           </p>
         )}
         {state.status === 'error' && (
-          <p role="alert" style={{ color: '#f87171', fontSize: '0.85rem', margin: 0 }}>
+          <p role="alert" className="l8-styled-node">
             {state.message}
           </p>
         )}
@@ -547,13 +512,7 @@ export function DesignSystemStudio({
           viewBox="0 0 320 64"
           role="img"
           aria-label="Shader Frame Pacing Telemetry"
-          style={{
-            width: '100%',
-            height: '64px',
-            background: 'rgba(15,23,42,0.65)',
-            borderRadius: '10px',
-            padding: '6px',
-          }}
+          className="l8-styled-node"
         >
           <polyline
             fill="none"
@@ -568,16 +527,7 @@ export function DesignSystemStudio({
       </div>
 
       <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: 'rgba(15, 23, 42, 0.65)',
-          borderRadius: '16px',
-          padding: '1rem',
-          border: '1px solid rgba(56, 189, 248, 0.2)',
-        }}
+        className="l8-styled-node"
       >
         <canvas
           ref={canvasRef}
@@ -585,7 +535,7 @@ export function DesignSystemStudio({
           height={240}
           aria-label="Interactive 3D PBR Material Preview"
         />
-        <span style={{ fontSize: '0.75rem', color: '#94a3b8', marginTop: '0.5rem' }}>
+        <span className="l8-styled-node">
           Real-Time Three.js MeshPhysicalMaterial TorusKnot
         </span>
       </div>
@@ -860,6 +810,7 @@ export async function upgradeTenantPlanAction(
 """,
         "component_name": "BillingKpiDashboard",
         "component_ts": """'use client';
+import './styles.css';
 
 import React, { useActionState, useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
@@ -908,29 +859,20 @@ export function BillingKpiDashboard({
   return (
     <section
       aria-label="Multi-Tenant SaaS Billing & Executive KPI Cockpit"
-      style={{
-        padding: '2rem',
-        background: 'linear-gradient(145deg, #090d16 0%, #111827 100%)',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.08)',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-        gap: '2rem',
-      }}
+      className="l8-styled-node"
     >
       <div>
-        <span style={{ color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase' }}>
+        <span className="l8-styled-node">
           Tenant: {tenantSlug} • OCC Lock v{activeVersion}
         </span>
-        <h2 style={{ fontSize: '1.6rem', fontWeight: 800, margin: '0.4rem 0 1rem' }}>
+        <h2 className="l8-styled-node">
           Executive ARR & Seat Allocation
         </h2>
 
         <div
           role="group"
           aria-label="Subscription Plan Tiers"
-          style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.65rem', marginBottom: '1.25rem' }}
+          className="l8-styled-node"
         >
           {TIERS.map((tier) => {
             const isSelected = selectedTier === tier.id;
@@ -940,18 +882,10 @@ export function BillingKpiDashboard({
                 type="button"
                 aria-pressed={isSelected}
                 onClick={() => setSelectedTier(tier.id)}
-                style={{
-                  padding: '0.85rem',
-                  borderRadius: '12px',
-                  border: isSelected ? '2px solid #38bdf8' : '1px solid rgba(255,255,255,0.12)',
-                  background: isSelected ? 'rgba(56, 189, 248, 0.14)' : 'rgba(15, 23, 42, 0.6)',
-                  color: '#f8fafc',
-                  cursor: 'pointer',
-                  textAlign: 'left',
-                }}
+                className="l8-styled-node"
               >
-                <div style={{ fontWeight: 700, fontSize: '0.85rem' }}>{tier.name}</div>
-                <div style={{ color: '#38bdf8', fontSize: '1.1rem', fontWeight: 800 }}>
+                <div className="l8-styled-node">{tier.name}</div>
+                <div className="l8-styled-node">
                   ${tier.pricePerSeat}/seat
                 </div>
               </button>
@@ -959,12 +893,12 @@ export function BillingKpiDashboard({
           })}
         </div>
 
-        <form action={formAction} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <form action={formAction} className="l8-styled-node">
           <input type="hidden" name="tenantSlug" value={tenantSlug} />
           <input type="hidden" name="planTier" value={selectedTier} />
           <input type="hidden" name="expectedVersion" value={activeVersion} />
 
-          <label style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', fontWeight: 600 }}>
+          <label className="l8-styled-node">
             <span>Provisioned Seats: {seats}</span>
             <input
               type="range"
@@ -979,22 +913,14 @@ export function BillingKpiDashboard({
           <button
             type="submit"
             disabled={isPending}
-            style={{
-              padding: '0.75rem 1.25rem',
-              borderRadius: '10px',
-              background: '#38bdf8',
-              color: '#090d16',
-              fontWeight: 700,
-              border: 'none',
-              cursor: 'pointer',
-            }}
+            className="l8-styled-node"
           >
             {isPending ? 'Verifying OCC Lock...' : 'Commit Multi-Tenant Seat Allocation'}
           </button>
         </form>
 
         {state.status === 'conflict' && (
-          <p role="alert" style={{ color: '#f87171', marginTop: '0.75rem' }}>
+          <p role="alert" className="l8-styled-node">
             {state.message}
           </p>
         )}
@@ -1002,15 +928,7 @@ export function BillingKpiDashboard({
 
       {/* Hollywood Radial KPI Telemetry Gauge */}
       <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: 'rgba(15, 23, 42, 0.7)',
-          borderRadius: '16px',
-          padding: '1.5rem',
-        }}
+        className="l8-styled-node"
       >
         <svg width="150" height="150" viewBox="0 0 130 130" aria-label="Projected ARR Radial Gauge">
           <circle cx="65" cy="65" r="52" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="10" />
@@ -1034,7 +952,7 @@ export function BillingKpiDashboard({
             ANNUAL RUN RATE
           </text>
         </svg>
-        <div data-testid="projected-mrr" style={{ marginTop: '0.75rem', fontWeight: 700, color: '#4ade80' }}>
+        <div data-testid="projected-mrr" className="l8-styled-node">
           MRR: ${projectedMrr.toLocaleString()}/mo • NRR: {activeTierMeta.nrr}%
         </div>
       </div>
@@ -1236,6 +1154,7 @@ export async function moveKanbanTaskAction(
 """,
         "component_name": "KineticKanban",
         "component_ts": """'use client';
+import './styles.css';
 
 import React, { useRef, useState } from 'react';
 import gsap from 'gsap';
@@ -1308,29 +1227,16 @@ export function KineticKanban({
   return (
     <section
       aria-label="URL-Synchronized Kinetic Kanban Engine"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-      }}
+      className="l8-styled-node"
     >
       <header
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '1rem',
-          marginBottom: '1.5rem',
-        }}
+        className="l8-styled-node"
       >
         <div>
-          <span style={{ color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700 }}>
+          <span className="l8-styled-node">
             O(1) LEXORANK FRACTIONAL INDEXING • URL DEEP-LINK READY
           </span>
-          <h2 style={{ margin: '0.25rem 0', fontSize: '1.5rem', fontWeight: 800 }}>
+          <h2 className="l8-styled-node">
             Kinetic Sprint Telemetry Board
           </h2>
         </div>
@@ -1341,23 +1247,13 @@ export function KineticKanban({
           placeholder="Filter tasks (?q=...)"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          style={{
-            padding: '0.6rem 1rem',
-            borderRadius: '10px',
-            background: '#1e293b',
-            color: '#f8fafc',
-            border: '1px solid rgba(255,255,255,0.15)',
-          }}
+          className="l8-styled-node"
         />
       </header>
 
       <div
         ref={boardRef}
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, minmax(220px, 1fr))',
-          gap: '1rem',
-        }}
+        className="l8-styled-node"
       >
         {COLUMNS.map((col) => {
           const colCards = filteredCards
@@ -1368,50 +1264,26 @@ export function KineticKanban({
             <div
               key={col.id}
               data-testid={`column-${col.id}`}
-              style={{
-                background: 'rgba(15, 23, 42, 0.75)',
-                padding: '1rem',
-                borderRadius: '14px',
-                border: '1px solid rgba(255,255,255,0.08)',
-              }}
+              className="l8-styled-node"
             >
-              <h3 style={{ fontSize: '0.9rem', color: '#94a3b8', marginTop: 0 }}>
+              <h3 className="l8-styled-node">
                 {col.label} ({colCards.length})
               </h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              <div className="l8-styled-node">
                 {colCards.map((card) => (
                   <article
                     key={card.id}
-                    style={{
-                      padding: '0.85rem',
-                      borderRadius: '10px',
-                      background: '#1e293b',
-                      border: '1px solid rgba(56, 189, 248, 0.2)',
-                    }}
+                    className="l8-styled-node"
                   >
-                    <div style={{ fontWeight: 700, marginBottom: '0.4rem' }}>{card.title}</div>
+                    <div className="l8-styled-node">{card.title}</div>
                     <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        fontSize: '0.75rem',
-                        color: '#94a3b8',
-                      }}
+                      className="l8-styled-node"
                     >
                       <span>Rank: {card.orderRank} • {card.points} pts</span>
                       <button
                         type="button"
                         onClick={() => advanceCard(card.id)}
-                        style={{
-                          padding: '0.3rem 0.6rem',
-                          borderRadius: '6px',
-                          background: '#38bdf8',
-                          color: '#090d16',
-                          fontWeight: 700,
-                          border: 'none',
-                          cursor: 'pointer',
-                        }}
+                        className="l8-styled-node"
                       >
                         Advance →
                       </button>
@@ -1424,7 +1296,7 @@ export function KineticKanban({
         })}
       </div>
 
-      <footer style={{ marginTop: '1.25rem', fontSize: '0.85rem', color: '#4ade80' }}>
+      <footer className="l8-styled-node">
         Completed Velocity: <strong data-testid="done-points">{donePoints} pts</strong>
       </footer>
     </section>
@@ -1636,6 +1508,7 @@ export async function triggerSagaTransitionAction(
 """,
         "component_name": "WorkflowSagaStudio",
         "component_ts": """'use client';
+import './styles.css';
 
 import React, { useState } from 'react';
 import type { SagaState } from './actions';
@@ -1673,32 +1546,19 @@ export function WorkflowSagaStudio(): React.JSX.Element {
   return (
     <section
       aria-label="Distributed Saga Workflow & State Machine Studio"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-      }}
+      className="l8-styled-node"
     >
-      <span style={{ color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700 }}>
+      <span className="l8-styled-node">
         DETERMINISTIC FINITE AUTOMATON • IDEMPOTENT SAGA CHECKPOINTS
       </span>
-      <h2 style={{ fontSize: '1.5rem', fontWeight: 800, margin: '0.35rem 0 1.25rem' }}>
-        Current DFA State: <code data-testid="dfa-state" style={{ color: '#4ade80' }}>{currentState}</code>
+      <h2 className="l8-styled-node">
+        Current DFA State: <code data-testid="dfa-state" className="l8-styled-node">{currentState}</code>
       </h2>
 
       {/* Directed SVG State Machine Graph */}
       <svg
         viewBox="0 0 520 110"
-        style={{
-          width: '100%',
-          maxWidth: '640px',
-          background: 'rgba(15,23,42,0.75)',
-          borderRadius: '14px',
-          padding: '0.75rem',
-          marginBottom: '1.25rem',
-        }}
+        className="l8-styled-node"
       >
         <line x1="60" y1="50" x2="450" y2="50" stroke="rgba(255,255,255,0.15)" strokeWidth="3" />
         {STATES.map((node) => {
@@ -1728,40 +1588,25 @@ export function WorkflowSagaStudio(): React.JSX.Element {
         })}
       </svg>
 
-      <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '1rem' }}>
+      <div className="l8-styled-node">
         <button
           type="button"
           onClick={handleAdvance}
           disabled={currentState === 'PROVISIONED'}
-          style={{
-            padding: '0.65rem 1.25rem',
-            borderRadius: '10px',
-            background: currentState === 'PROVISIONED' ? '#334155' : '#38bdf8',
-            color: '#090d16',
-            fontWeight: 700,
-            border: 'none',
-            cursor: 'pointer',
-          }}
+          className="l8-styled-node"
         >
           Commit Next Idempotent Checkpoint →
         </button>
         <button
           type="button"
           onClick={handleReset}
-          style={{
-            padding: '0.65rem 1rem',
-            borderRadius: '10px',
-            background: 'transparent',
-            color: '#e2e8f0',
-            border: '1px solid rgba(255,255,255,0.2)',
-            cursor: 'pointer',
-          }}
+          className="l8-styled-node"
         >
           Compensate & Reset Saga
         </button>
       </div>
 
-      <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>
+      <div className="l8-styled-node">
         Audit Log: {history.join(' • ')}
       </div>
     </section>
@@ -1938,6 +1783,7 @@ export async function recordCommandExecutionAction(
 """,
         "component_name": "CommandPaletteEngine",
         "component_ts": """'use client';
+import './styles.css';
 
 import React, { useDeferredValue, useMemo, useState } from 'react';
 
@@ -2005,14 +1851,7 @@ export function CommandPaletteEngine({
   return (
     <section
       aria-label="Zero-Latency Command Palette & Omni-Search Engine"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.12)',
-        maxWidth: '680px',
-      }}
+      className="l8-styled-node"
     >
       <input
         role="combobox"
@@ -2027,22 +1866,13 @@ export function CommandPaletteEngine({
           setActiveIndex(0);
         }}
         onKeyDown={handleKeyDown}
-        style={{
-          width: '100%',
-          padding: '0.9rem 1.1rem',
-          borderRadius: '12px',
-          background: '#1e293b',
-          color: '#f8fafc',
-          border: '1px solid #38bdf8',
-          fontSize: '1rem',
-          marginBottom: '1rem',
-        }}
+        className="l8-styled-node"
       />
 
       <ul
         id="omni-command-listbox"
         role="listbox"
-        style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}
+        className="l8-styled-node"
       >
         {ranked.map((cmd, idx) => {
           const isSelected = idx === activeIndex;
@@ -2053,31 +1883,16 @@ export function CommandPaletteEngine({
               role="option"
               aria-selected={isSelected}
               onClick={() => setLastExecuted(cmd.title)}
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '0.75rem 1rem',
-                borderRadius: '10px',
-                background: isSelected ? 'rgba(56, 189, 248, 0.18)' : 'rgba(15, 23, 42, 0.7)',
-                border: isSelected ? '1px solid #38bdf8' : '1px solid rgba(255,255,255,0.06)',
-                cursor: 'pointer',
-              }}
+              className="l8-styled-node"
             >
               <div>
-                <div style={{ fontWeight: 700 }}>{cmd.title}</div>
-                <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
+                <div className="l8-styled-node">{cmd.title}</div>
+                <div className="l8-styled-node">
                   {cmd.category} • Score: {cmd.score.toFixed(1)}
                 </div>
               </div>
               <kbd
-                style={{
-                  background: '#0f172a',
-                  padding: '0.25rem 0.55rem',
-                  borderRadius: '6px',
-                  fontSize: '0.75rem',
-                  color: '#38bdf8',
-                }}
+                className="l8-styled-node"
               >
                 {cmd.shortcut}
               </kbd>
@@ -2086,7 +1901,7 @@ export function CommandPaletteEngine({
         })}
       </ul>
 
-      <footer style={{ marginTop: '1rem', fontSize: '0.85rem', color: '#4ade80' }}>
+      <footer className="l8-styled-node">
         Last Executed Command: <strong data-testid="executed-cmd">{lastExecuted}</strong>
       </footer>
     </section>

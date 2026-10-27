@@ -1,4 +1,5 @@
 'use client';
+import './styles.css';
 
 import React, { useOptimistic, useState, useTransition } from 'react';
 
@@ -54,19 +55,13 @@ export function AiCopilotWorkspace(): React.JSX.Element {
   return (
     <section
       aria-label="Streaming AI Copilot & Generative UI Workspace"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-      }}
+      className="l8-styled-node"
     >
-      <header style={{ marginBottom: '1rem' }}>
-        <span style={{ color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700 }}>
+      <header className="l8-styled-node">
+        <span className="l8-styled-node">
           REACT 19 USEOPTIMISTIC STREAM • GENERATIVE SERVER ARTIFACTS
         </span>
-        <h2 style={{ margin: '0.25rem 0', fontSize: '1.45rem', fontWeight: 800 }}>
+        <h2 className="l8-styled-node">
           Agentic Architecture Copilot
         </h2>
       </header>
@@ -75,62 +70,31 @@ export function AiCopilotWorkspace(): React.JSX.Element {
         role="log"
         aria-live="polite"
         data-testid="copilot-log"
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '0.75rem',
-          marginBottom: '1.25rem',
-          padding: '1rem',
-          background: '#0f172a',
-          borderRadius: '12px',
-        }}
+        className="l8-styled-node"
       >
         {optimisticMessages.map((msg) => (
           <div
             key={msg.id}
-            style={{
-              alignSelf: msg.role === 'user' ? 'flex-end' : 'flex-start',
-              background: msg.role === 'user' ? '#38bdf8' : '#1e293b',
-              color: msg.role === 'user' ? '#090d16' : '#f8fafc',
-              padding: '0.7rem 1rem',
-              borderRadius: '10px',
-              fontWeight: msg.role === 'user' ? 700 : 500,
-              maxWidth: '85%',
-            }}
+            className="l8-styled-node"
           >
             {msg.content}
           </div>
         ))}
       </div>
 
-      <form onSubmit={handleSend} style={{ display: 'flex', gap: '0.75rem' }}>
+      <form onSubmit={handleSend} className="l8-styled-node">
         <input
           type="text"
           aria-label="Copilot Prompt Input"
           placeholder="Ask Copilot to synthesize an architecture diagram..."
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
-          style={{
-            flex: 1,
-            padding: '0.75rem 1rem',
-            borderRadius: '10px',
-            background: '#1e293b',
-            color: '#f8fafc',
-            border: '1px solid rgba(255,255,255,0.15)',
-          }}
+          className="l8-styled-node"
         />
         <button
           type="submit"
           disabled={isPending}
-          style={{
-            padding: '0.75rem 1.25rem',
-            borderRadius: '10px',
-            background: '#38bdf8',
-            color: '#090d16',
-            fontWeight: 700,
-            border: 'none',
-            cursor: 'pointer',
-          }}
+          className="l8-styled-node"
         >
           Stream Synthesis
         </button>

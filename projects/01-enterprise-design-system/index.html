@@ -3,129 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Project 01: Enterprise Design System &amp; 3D Shader Studio — Principal Engineer L8+ Follow-Along Course</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <style>
-    :root {
-      --bg: #060911;
-      --panel: #0d1322;
-      --border: rgba(56, 189, 248, 0.18);
-      --cyan: #38bdf8;
-      --emerald: #4ade80;
-      --text: #f8fafc;
-      --muted: #94a3b8;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: radial-gradient(circle at top right, #1e1b4b 0%, var(--bg) 55%);
-      color: var(--text);
-      line-height: 1.6;
-    }
-    .container { max-width: 1280px; margin: 0 auto; padding: 2.5rem 1.5rem; }
-    .top-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 2rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .top-nav a {
-      color: var(--cyan);
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 0.9rem;
-    }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.25fr 0.75fr;
-      gap: 2rem;
-      margin-bottom: 2.5rem;
-    }
-    @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } }
-    .hero-card, .sim-card, .arch-card, .step-card {
-      background: rgba(13, 19, 34, 0.85);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 1.75rem;
-      backdrop-filter: blur(16px);
-    }
-    .eyebrow {
-      color: var(--cyan);
-      font-size: 0.75rem;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-    h1 { font-size: 2rem; margin: 0.4rem 0 0.8rem; font-weight: 900; }
-    .desc { color: var(--muted); font-size: 1rem; margin-bottom: 1.5rem; }
-    .kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-    }
-    .kpi-card {
-      background: rgba(6, 9, 17, 0.75);
-      padding: 1rem;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.07);
-    }
-    .kpi-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; }
-    .kpi-val { font-size: 1.45rem; font-weight: 900; color: var(--cyan); margin: 0.2rem 0; }
-    .kpi-trend { font-size: 0.72rem; color: var(--emerald); font-weight: 700; }
-    .kpi-bar { height: 5px; background: rgba(255,255,255,0.1); border-radius: 4px; margin-top: 0.5rem; overflow: hidden; }
-    .kpi-fill { height: 100%; background: linear-gradient(90deg, var(--cyan), var(--emerald)); }
-    .arch-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 2.5rem;
-    }
-    .step-card { margin-bottom: 1.75rem; }
-    .step-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
-    .step-badge {
-      color: var(--emerald);
-      font-family: monospace;
-      font-size: 0.78rem;
-      font-weight: 700;
-    }
-    .step-header h3 { margin: 0.25rem 0; font-size: 1.25rem; }
-    .step-rationale { margin: 0; color: var(--muted); font-size: 0.9rem; }
-    .copy-btn, .pulse-btn {
-      background: var(--cyan);
-      color: #060911;
-      border: none;
-      padding: 0.55rem 1rem;
-      border-radius: 8px;
-      font-weight: 800;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-    pre {
-      background: #050811;
-      padding: 1.25rem;
-      border-radius: 12px;
-      overflow-x: auto;
-      border: 1px solid rgba(255,255,255,0.08);
-      font-size: 0.84rem;
-      line-height: 1.55;
-      color: #e2e8f0;
-    }
-  </style>
+  <title>Project 01: Enterprise Design System &amp; 3D Shader Studio — Principal Engineer L8++ Follow-Along Course</title>
+  <link rel="stylesheet" href="course.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="course.js" defer></script>
 </head>
 <body>
   <div class="container">
     <nav class="top-nav">
-      <a href="../../index.html">← Back to Master L8+ Architecture Studio Portal</a>
+      <a href="../../index.html">← Back to Master L8++ Architecture Studio Portal</a>
       <span class="eyebrow">Oct 26, 2026 • Node 24 LTS • React 19 • Prisma v6 • Three.js • GSAP</span>
     </nav>
 
@@ -139,29 +26,29 @@
           <div class="kpi-label">Token Hydration INP</div>
           <div class="kpi-val">3.8ms</div>
           <div class="kpi-trend">-64% vs CSS-in-JS</div>
-          <div class="kpi-bar"><div class="kpi-fill" style="width: 96%"></div></div>
+          <progress class="kpi-progress" value="96" max="100"></progress>
         </div>
         
         <div class="kpi-card">
           <div class="kpi-label">WebGL Shader Frame Budget</div>
           <div class="kpi-val">120 FPS</div>
           <div class="kpi-trend">8.3ms GPU Frame</div>
-          <div class="kpi-bar"><div class="kpi-fill" style="width: 98%"></div></div>
+          <progress class="kpi-progress" value="98" max="100"></progress>
         </div>
         
         <div class="kpi-card">
           <div class="kpi-label">WCAG 2.2 AAA Contrast</div>
           <div class="kpi-val">100%</div>
           <div class="kpi-trend">APCA Lc &gt;= 90</div>
-          <div class="kpi-bar"><div class="kpi-fill" style="width: 100%"></div></div>
+          <progress class="kpi-progress" value="100" max="100"></progress>
         </div>
         </div>
       </div>
 
-      <div class="sim-card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
-        <span class="eyebrow" style="margin-bottom:0.5rem;">Live Three.js 3D &amp; GSAP Telemetry Preview</span>
+      <div class="sim-card">
+        <span class="eyebrow">Live Three.js 3D &amp; GSAP Telemetry Preview</span>
         <canvas id="project-3d-canvas" width="360" height="220" aria-label="Interactive 3D WebGL Simulation"></canvas>
-        <button type="button" class="pulse-btn" style="margin-top:0.75rem;" onclick="pulseSimulation()">
+        <button type="button" class="pulse-btn" id="btn-pulse-sim">
           Trigger GSAP Kinetic Shockwave
         </button>
       </div>
@@ -169,10 +56,10 @@
 
     <section class="arch-grid">
       <div class="arch-card">
-        <span class="eyebrow">Principal L8+ System Architecture</span>
+        <span class="eyebrow">Principal L8++ System Architecture</span>
         <p>Eliminates runtime CSS-in-JS serialization overhead by binding OKLCH perceptual color tokens directly to CSS Cascade Layers (@layer reset, tokens, recipes, utilities). Polymorphic React 19 primitives accept ref as a regular prop (removing forwardRef wrapper bloat) and synchronize design token mutations with a persistent Three.js WebGL PBR (Physically Based Rendering) shader studio and SQLite/PostgreSQL storage via Prisma v6.</p>
         <span class="eyebrow">Performance, Security &amp; WCAG 2.2 AAA</span>
-        <p style="margin-bottom:0;">Enforces strict Zod hex and PBR range [0, 1] validation at the Server Action boundary before touching Prisma. Disposes Three.js BufferGeometry, MeshPhysicalMaterial, and WebGLRenderer on unmount to guarantee zero GPU VRAM leaks.</p>
+        <p>Enforces strict Zod hex and PBR range [0, 1] validation at the Server Action boundary before touching Prisma. Disposes Three.js BufferGeometry, MeshPhysicalMaterial, and WebGLRenderer on unmount to guarantee zero GPU VRAM leaks.</p>
       </div>
       <div class="arch-card">
         <span class="eyebrow">Oct 2026 Engineering Deep-Dive Mechanics</span>
@@ -181,7 +68,7 @@
     </section>
 
     <section>
-      <h2 style="font-size:1.6rem;margin-bottom:1.25rem;">End-to-End Follow-Along Implementation Blueprint (100% Untruncated)</h2>
+      <h2 class="section-title">End-to-End Follow-Along Implementation Blueprint (100% Untruncated)</h2>
       
         <article class="step-card" id="step-1">
           <div class="step-header">
@@ -190,7 +77,7 @@
               <h3>Step 1 — Multi-Model Prisma v6 Schema (DesignToken, TokenRevision &amp; ThemePreset)</h3>
               <p class="step-rationale">Define normalized relational tables for design tokens, immutable audit revisions, and composite theme presets with composite B-Tree indexes.</p>
             </div>
-            <button type="button" class="copy-btn" onclick="copyStepCode('code-1', this)">Copy Full File</button>
+            <button type="button" class="copy-btn" data-copy-target="code-1">Copy Full File</button>
           </div>
           <pre><code id="code-1">datasource db {
   provider = &quot;sqlite&quot;
@@ -235,7 +122,7 @@ model TokenRevision {
               <h3>Step 2 — Deterministic Idempotent Database Seed (prisma/seed.ts)</h3>
               <p class="step-rationale">Seed initial OKLCH/Hex enterprise surface and accent tokens alongside an initial audit revision trail using upsert.</p>
             </div>
-            <button type="button" class="copy-btn" onclick="copyStepCode('code-2', this)">Copy Full File</button>
+            <button type="button" class="copy-btn" data-copy-target="code-2">Copy Full File</button>
           </div>
           <pre><code id="code-2">import { prisma } from &#x27;../src/db&#x27;;
 
@@ -293,7 +180,7 @@ main()
               <h3>Step 3 — Zero-Any Server Actions with Zod &amp; exactOptionalPropertyTypes (src/actions.ts)</h3>
               <p class="step-rationale">Validate token mutations with Zod, execute atomic Prisma transactions recording a TokenRevision, and return a typed ActionResult discriminated union.</p>
             </div>
-            <button type="button" class="copy-btn" onclick="copyStepCode('code-3', this)">Copy Full File</button>
+            <button type="button" class="copy-btn" data-copy-target="code-3">Copy Full File</button>
           </div>
           <pre><code id="code-3">// === FILE: src/db.ts ===
 import { PrismaClient } from &#x27;@prisma/client&#x27;;
@@ -409,9 +296,10 @@ export async function updateDesignTokenAction(
               <h3>Step 4 — Polymorphic React 19 Studio, Three.js PBR Canvas &amp; GSAP Telemetry (src/DesignSystemStudio.tsx)</h3>
               <p class="step-rationale">Build the Hollywood-grade 3D PBR material inspector, interactive token switcher, SVG KPI sparkline gauges, and optimistic mutation workflow.</p>
             </div>
-            <button type="button" class="copy-btn" onclick="copyStepCode('code-4', this)">Copy Full File</button>
+            <button type="button" class="copy-btn" data-copy-target="code-4">Copy Full File</button>
           </div>
           <pre><code id="code-4">&#x27;use client&#x27;;
+import &#x27;./styles.css&#x27;;
 
 import React, {
   useActionState,
@@ -442,21 +330,13 @@ export function PrimitiveBox&lt;E extends ElementType = &#x27;button&#x27;&gt;({
   as,
   variant = &#x27;solid&#x27;,
   children,
-  style,
   ...rest
 }: PolymorphicProps&lt;E&gt;): React.JSX.Element {
   const Component = as ?? &#x27;button&#x27;;
   return (
     &lt;Component
       data-variant={variant}
-      style={{
-        padding: &#x27;0.65rem 1.25rem&#x27;,
-        borderRadius: &#x27;10px&#x27;,
-        fontWeight: 600,
-        border: &#x27;1px solid rgba(255,255,255,0.14)&#x27;,
-        transition: &#x27;transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)&#x27;,
-        ...style,
-      }}
+      className=&quot;l8-styled-node&quot;
       {...rest}
     &gt;
       {children}
@@ -603,31 +483,16 @@ export function DesignSystemStudio({
   return (
     &lt;section
       aria-label=&quot;Enterprise Design System &amp; 3D Shader Studio&quot;
-      style={{
-        display: &#x27;grid&#x27;,
-        gridTemplateColumns: &#x27;repeat(auto-fit, minmax(320px, 1fr))&#x27;,
-        gap: &#x27;1.75rem&#x27;,
-        padding: &#x27;2rem&#x27;,
-        background: &#x27;radial-gradient(circle at top right, #1e1b4b, #090d16)&#x27;,
-        color: &#x27;#f8fafc&#x27;,
-        borderRadius: &#x27;20px&#x27;,
-        border: &#x27;1px solid rgba(255,255,255,0.1)&#x27;,
-      }}
+      className=&quot;l8-styled-node&quot;
     &gt;
-      &lt;div ref={cardRef} style={{ display: &#x27;flex&#x27;, flexDirection: &#x27;column&#x27;, gap: &#x27;1rem&#x27; }}&gt;
+      &lt;div ref={cardRef} className=&quot;l8-styled-node&quot;&gt;
         &lt;header&gt;
           &lt;span
-            style={{
-              fontSize: &#x27;0.75rem&#x27;,
-              letterSpacing: &#x27;0.1em&#x27;,
-              textTransform: &#x27;uppercase&#x27;,
-              color: &#x27;#38bdf8&#x27;,
-              fontWeight: 700,
-            }}
+            className=&quot;l8-styled-node&quot;
           &gt;
             OKLCH Cascade Layer + Three.js PBR Engine
           &lt;/span&gt;
-          &lt;h2 style={{ fontSize: &#x27;1.65rem&#x27;, fontWeight: 800, margin: &#x27;0.25rem 0&#x27; }}&gt;
+          &lt;h2 className=&quot;l8-styled-node&quot;&gt;
             {activeToken.name}
           &lt;/h2&gt;
         &lt;/header&gt;
@@ -635,7 +500,7 @@ export function DesignSystemStudio({
         &lt;div
           role=&quot;group&quot;
           aria-label=&quot;Design Token Selector&quot;
-          style={{ display: &#x27;flex&#x27;, gap: &#x27;0.5rem&#x27;, flexWrap: &#x27;wrap&#x27; }}
+          className=&quot;l8-styled-node&quot;
         &gt;
           {initialTokens.map((tok, idx) =&gt; (
             &lt;button
@@ -643,26 +508,18 @@ export function DesignSystemStudio({
               type=&quot;button&quot;
               aria-pressed={idx === selectedIdx}
               onClick={() =&gt; setSelectedIdx(idx)}
-              style={{
-                padding: &#x27;0.4rem 0.75rem&#x27;,
-                borderRadius: &#x27;8px&#x27;,
-                border: idx === selectedIdx ? &#x27;1px solid #38bdf8&#x27; : &#x27;1px solid rgba(255,255,255,0.12)&#x27;,
-                background: idx === selectedIdx ? &#x27;rgba(56,189,248,0.15)&#x27; : &#x27;rgba(15,23,42,0.6)&#x27;,
-                color: &#x27;#f8fafc&#x27;,
-                cursor: &#x27;pointer&#x27;,
-                fontSize: &#x27;0.8rem&#x27;,
-              }}
+              className=&quot;l8-styled-node&quot;
             &gt;
               {tok.name}
             &lt;/button&gt;
           ))}
         &lt;/div&gt;
 
-        &lt;form action={handleSubmit} style={{ display: &#x27;flex&#x27;, flexDirection: &#x27;column&#x27;, gap: &#x27;0.9rem&#x27; }}&gt;
+        &lt;form action={handleSubmit} className=&quot;l8-styled-node&quot;&gt;
           &lt;input type=&quot;hidden&quot; name=&quot;name&quot; value={activeToken.name} /&gt;
           &lt;input type=&quot;hidden&quot; name=&quot;roughness&quot; value={activeToken.roughness} /&gt;
           &lt;input type=&quot;hidden&quot; name=&quot;metalness&quot; value={activeToken.metalness} /&gt;
-          &lt;label style={{ display: &#x27;flex&#x27;, alignItems: &#x27;center&#x27;, gap: &#x27;0.75rem&#x27;, fontWeight: 600 }}&gt;
+          &lt;label className=&quot;l8-styled-node&quot;&gt;
             &lt;span&gt;Token Hex Value:&lt;/span&gt;
             &lt;input
               type=&quot;color&quot;
@@ -673,23 +530,18 @@ export function DesignSystemStudio({
             /&gt;
             &lt;code
               data-testid=&quot;optimistic-hex&quot;
-              style={{
-                background: &#x27;rgba(15,23,42,0.75)&#x27;,
-                padding: &#x27;0.25rem 0.6rem&#x27;,
-                borderRadius: &#x27;6px&#x27;,
-                color: draftColor,
-              }}
+              className=&quot;l8-styled-node&quot;
             &gt;
               {isPending ? optimisticColor : draftColor}
             &lt;/code&gt;
           &lt;/label&gt;
 
-          &lt;div style={{ display: &#x27;flex&#x27;, gap: &#x27;0.75rem&#x27;, alignItems: &#x27;center&#x27; }}&gt;
+          &lt;div className=&quot;l8-styled-node&quot;&gt;
             &lt;PrimitiveBox
               as=&quot;button&quot;
               type=&quot;submit&quot;
               disabled={isPending}
-              style={{ background: draftColor, color: &#x27;#090d16&#x27;, cursor: &#x27;pointer&#x27; }}
+              className=&quot;l8-styled-node&quot;
             &gt;
               {isPending ? &#x27;Syncing Shader &amp; Prisma...&#x27; : &#x27;Commit Token &amp; Pulse 3D Shader&#x27;}
             &lt;/PrimitiveBox&gt;
@@ -697,7 +549,7 @@ export function DesignSystemStudio({
               as=&quot;a&quot;
               href=&quot;#wcag-audit&quot;
               variant=&quot;ghost&quot;
-              style={{ color: &#x27;#e2e8f0&#x27;, textDecoration: &#x27;none&#x27; }}
+              className=&quot;l8-styled-node&quot;
             &gt;
               Verify APCA Contrast
             &lt;/PrimitiveBox&gt;
@@ -705,12 +557,12 @@ export function DesignSystemStudio({
         &lt;/form&gt;
 
         {state.status === &#x27;success&#x27; &amp;&amp; (
-          &lt;p role=&quot;status&quot; style={{ color: &#x27;#4ade80&#x27;, fontSize: &#x27;0.85rem&#x27;, margin: 0 }}&gt;
+          &lt;p role=&quot;status&quot; className=&quot;l8-styled-node&quot;&gt;
             Persisted {state.data.name} ({state.data.value}) to Prisma v6.
           &lt;/p&gt;
         )}
         {state.status === &#x27;error&#x27; &amp;&amp; (
-          &lt;p role=&quot;alert&quot; style={{ color: &#x27;#f87171&#x27;, fontSize: &#x27;0.85rem&#x27;, margin: 0 }}&gt;
+          &lt;p role=&quot;alert&quot; className=&quot;l8-styled-node&quot;&gt;
             {state.message}
           &lt;/p&gt;
         )}
@@ -720,13 +572,7 @@ export function DesignSystemStudio({
           viewBox=&quot;0 0 320 64&quot;
           role=&quot;img&quot;
           aria-label=&quot;Shader Frame Pacing Telemetry&quot;
-          style={{
-            width: &#x27;100%&#x27;,
-            height: &#x27;64px&#x27;,
-            background: &#x27;rgba(15,23,42,0.65)&#x27;,
-            borderRadius: &#x27;10px&#x27;,
-            padding: &#x27;6px&#x27;,
-          }}
+          className=&quot;l8-styled-node&quot;
         &gt;
           &lt;polyline
             fill=&quot;none&quot;
@@ -741,16 +587,7 @@ export function DesignSystemStudio({
       &lt;/div&gt;
 
       &lt;div
-        style={{
-          display: &#x27;flex&#x27;,
-          flexDirection: &#x27;column&#x27;,
-          alignItems: &#x27;center&#x27;,
-          justifyContent: &#x27;center&#x27;,
-          background: &#x27;rgba(15, 23, 42, 0.65)&#x27;,
-          borderRadius: &#x27;16px&#x27;,
-          padding: &#x27;1rem&#x27;,
-          border: &#x27;1px solid rgba(56, 189, 248, 0.2)&#x27;,
-        }}
+        className=&quot;l8-styled-node&quot;
       &gt;
         &lt;canvas
           ref={canvasRef}
@@ -758,7 +595,7 @@ export function DesignSystemStudio({
           height={240}
           aria-label=&quot;Interactive 3D PBR Material Preview&quot;
         /&gt;
-        &lt;span style={{ fontSize: &#x27;0.75rem&#x27;, color: &#x27;#94a3b8&#x27;, marginTop: &#x27;0.5rem&#x27; }}&gt;
+        &lt;span className=&quot;l8-styled-node&quot;&gt;
           Real-Time Three.js MeshPhysicalMaterial TorusKnot
         &lt;/span&gt;
       &lt;/div&gt;
@@ -774,7 +611,7 @@ export function DesignSystemStudio({
               <h3>Step 5 — Vitest Unit Suite &amp; Playwright WCAG/WebGL Verification (tests/)</h3>
               <p class="step-rationale">Verify polymorphic element rendering, optimistic token updates, and headless-safe WebGL fallback behavior.</p>
             </div>
-            <button type="button" class="copy-btn" onclick="copyStepCode('code-5', this)">Copy Full File</button>
+            <button type="button" class="copy-btn" data-copy-target="code-5">Copy Full File</button>
           </div>
           <pre><code id="code-5">// === FILE: tests/unit.test.tsx ===
 import React from &#x27;react&#x27;;
@@ -835,55 +672,5 @@ test.describe(&#x27;Project 01: Enterprise Design System &amp; 3D Shader Studio 
         
     </section>
   </div>
-
-  <script>
-    function copyStepCode(id, btn) {
-      const text = document.getElementById(id).textContent;
-      navigator.clipboard.writeText(text);
-      const orig = btn.textContent;
-      btn.textContent = 'Copied 100%!';
-      setTimeout(() => btn.textContent = orig, 1500);
-    }
-
-    let activeMesh = null;
-    (function initThree() {
-      const canvas = document.getElementById('project-3d-canvas');
-      if (!canvas || typeof THREE === 'undefined') return;
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(45, 360 / 220, 0.1, 100);
-      camera.position.z = 3.5;
-      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-      renderer.setSize(360, 220);
-
-      const mode = "three_shader";
-      let geo;
-      if (mode.includes('globe') || mode.includes('spatial')) {
-        geo = new THREE.SphereGeometry(1.0, 24, 24);
-      } else if (mode.includes('orderbook') || mode.includes('grid')) {
-        geo = new THREE.PlaneGeometry(2.2, 1.5, 12, 12);
-      } else if (mode.includes('vault')) {
-        geo = new THREE.IcosahedronGeometry(0.95, 1);
-      } else {
-        geo = new THREE.TorusKnotGeometry(0.75, 0.24, 100, 24);
-      }
-      const mat = new THREE.MeshBasicMaterial({ color: 0x38bdf8, wireframe: true });
-      activeMesh = new THREE.Mesh(geo, mat);
-      scene.add(activeMesh);
-
-      function animate() {
-        activeMesh.rotation.x += 0.007;
-        activeMesh.rotation.y += 0.011;
-        renderer.render(scene, camera);
-        requestAnimationFrame(animate);
-      }
-      animate();
-    })();
-
-    function pulseSimulation() {
-      if (activeMesh && typeof gsap !== 'undefined') {
-        gsap.fromTo(activeMesh.scale, { x: 1.35, y: 1.35, z: 1.35 }, { x: 1, y: 1, z: 1, duration: 0.75, ease: 'elastic.out(1, 0.4)' });
-      }
-    }
-  </script>
 </body>
 </html>

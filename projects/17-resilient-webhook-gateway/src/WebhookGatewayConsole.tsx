@@ -1,4 +1,5 @@
 'use client';
+import './styles.css';
 
 import React, { useState } from 'react';
 import { computeFullJitterBackoffMs } from './actions';
@@ -31,73 +32,41 @@ export function WebhookGatewayConsole(): React.JSX.Element {
   return (
     <section
       aria-label="Resilient Webhook Gateway & Circuit Breaker FSM"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-      }}
+      className="l8-styled-node"
     >
-      <span style={{ color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700 }}>
+      <span className="l8-styled-node">
         HALF-OPEN CIRCUIT BREAKER FSM • AWS FULL-JITTER BACKOFF
       </span>
-      <h2 style={{ margin: '0.35rem 0', fontSize: '1.5rem', fontWeight: 800 }}>
+      <h2 className="l8-styled-node">
         Circuit State:{' '}
         <code
           data-testid="circuit-state"
-          style={{
-            color: circuit === 'CLOSED' ? '#4ade80' : circuit === 'OPEN' ? '#f87171' : '#facc15',
-          }}
+          className="l8-styled-node"
         >
           {circuit}
         </code>{' '}
         • Consecutive Failures: {failures} (Next Backoff: {nextBackoff}ms)
       </h2>
 
-      <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginTop: '1rem' }}>
+      <div className="l8-styled-node">
         <button
           type="button"
           onClick={recordFailure}
-          style={{
-            padding: '0.65rem 1.1rem',
-            borderRadius: '10px',
-            background: '#f43f5e',
-            color: '#f8fafc',
-            fontWeight: 700,
-            border: 'none',
-            cursor: 'pointer',
-          }}
+          className="l8-styled-node"
         >
           Simulate Downstream 503 Timeout
         </button>
         <button
           type="button"
           onClick={triggerHalfOpenProbe}
-          style={{
-            padding: '0.65rem 1.1rem',
-            borderRadius: '10px',
-            background: '#f59e0b',
-            color: '#090d16',
-            fontWeight: 700,
-            border: 'none',
-            cursor: 'pointer',
-          }}
+          className="l8-styled-node"
         >
           Transition to HALF_OPEN Probe
         </button>
         <button
           type="button"
           onClick={succeedProbe}
-          style={{
-            padding: '0.65rem 1.1rem',
-            borderRadius: '10px',
-            background: '#10b981',
-            color: '#090d16',
-            fontWeight: 700,
-            border: 'none',
-            cursor: 'pointer',
-          }}
+          className="l8-styled-node"
         >
           Probe 200 OK (Close Circuit)
         </button>

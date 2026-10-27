@@ -181,6 +181,7 @@ export async function promoteRemoteCanaryAction(
 """,
         "component_name": "MicroFrontendHost",
         "component_ts": """'use client';
+import './styles.css';
 
 import React, { useState } from 'react';
 
@@ -206,44 +207,33 @@ export function MicroFrontendHost(): React.JSX.Element {
   return (
     <section
       aria-label="Micro-Frontend Federation Host & SRI Shell"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-      }}
+      className="l8-styled-node"
     >
-      <span style={{ color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700 }}>
+      <span className="l8-styled-node">
         MODULE FEDERATION ISOLATION • SHA-384 SUBRESOURCE INTEGRITY
       </span>
-      <h2 style={{ margin: '0.35rem 0 1.25rem', fontSize: '1.45rem', fontWeight: 800 }}>
-        Host Shell Status: <span data-testid="host-shell-status" style={{ color: '#4ade80' }}>100% HEALTHY</span>
+      <h2 className="l8-styled-node">
+        Host Shell Status: <span data-testid="host-shell-status" className="l8-styled-node">100% HEALTHY</span>
       </h2>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
+      <div className="l8-styled-node">
         {remotes.map((rem) => (
           <article
             key={rem.scope}
             data-testid={`slot-${rem.scope}`}
-            style={{
-              padding: '1.25rem',
-              borderRadius: '14px',
-              background: rem.crashed ? 'rgba(244, 63, 94, 0.14)' : 'rgba(15, 23, 42, 0.75)',
-              border: rem.crashed ? '1px solid #f43f5e' : '1px solid rgba(56, 189, 248, 0.25)',
-            }}
+            className="l8-styled-node"
           >
-            <div style={{ fontWeight: 800, fontSize: '1rem' }}>{rem.scope}</div>
-            <div style={{ fontSize: '0.75rem', color: '#94a3b8', margin: '0.3rem 0 0.85rem' }}>
+            <div className="l8-styled-node">{rem.scope}</div>
+            <div className="l8-styled-node">
               {rem.version} • SRI SHA-384 Verified
             </div>
 
             {rem.crashed ? (
-              <div role="alert" style={{ color: '#f87171', fontSize: '0.82rem', marginBottom: '0.75rem' }}>
+              <div role="alert" className="l8-styled-node">
                 ErrorBoundary Contained Fault! Host shell unaffected.
               </div>
             ) : (
-              <div style={{ color: '#4ade80', fontSize: '0.82rem', marginBottom: '0.75rem' }}>
+              <div className="l8-styled-node">
                 Remote Mounted & Streaming
               </div>
             )}
@@ -251,15 +241,7 @@ export function MicroFrontendHost(): React.JSX.Element {
             <button
               type="button"
               onClick={() => toggleFault(rem.scope)}
-              style={{
-                padding: '0.5rem 0.9rem',
-                borderRadius: '8px',
-                background: rem.crashed ? '#10b981' : '#f43f5e',
-                color: '#090d16',
-                fontWeight: 700,
-                border: 'none',
-                cursor: 'pointer',
-              }}
+              className="l8-styled-node"
             >
               {rem.crashed ? 'Rollback to Last Known Good' : `Inject Fault in ${rem.scope}`}
             </button>
@@ -459,6 +441,7 @@ export async function recordWebhookDeliveryAction(
 """,
         "component_name": "WebhookGatewayConsole",
         "component_ts": """'use client';
+import './styles.css';
 
 import React, { useState } from 'react';
 import { computeFullJitterBackoffMs } from './actions';
@@ -491,73 +474,41 @@ export function WebhookGatewayConsole(): React.JSX.Element {
   return (
     <section
       aria-label="Resilient Webhook Gateway & Circuit Breaker FSM"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-      }}
+      className="l8-styled-node"
     >
-      <span style={{ color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700 }}>
+      <span className="l8-styled-node">
         HALF-OPEN CIRCUIT BREAKER FSM • AWS FULL-JITTER BACKOFF
       </span>
-      <h2 style={{ margin: '0.35rem 0', fontSize: '1.5rem', fontWeight: 800 }}>
+      <h2 className="l8-styled-node">
         Circuit State:{' '}
         <code
           data-testid="circuit-state"
-          style={{
-            color: circuit === 'CLOSED' ? '#4ade80' : circuit === 'OPEN' ? '#f87171' : '#facc15',
-          }}
+          className="l8-styled-node"
         >
           {circuit}
         </code>{' '}
         • Consecutive Failures: {failures} (Next Backoff: {nextBackoff}ms)
       </h2>
 
-      <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginTop: '1rem' }}>
+      <div className="l8-styled-node">
         <button
           type="button"
           onClick={recordFailure}
-          style={{
-            padding: '0.65rem 1.1rem',
-            borderRadius: '10px',
-            background: '#f43f5e',
-            color: '#f8fafc',
-            fontWeight: 700,
-            border: 'none',
-            cursor: 'pointer',
-          }}
+          className="l8-styled-node"
         >
           Simulate Downstream 503 Timeout
         </button>
         <button
           type="button"
           onClick={triggerHalfOpenProbe}
-          style={{
-            padding: '0.65rem 1.1rem',
-            borderRadius: '10px',
-            background: '#f59e0b',
-            color: '#090d16',
-            fontWeight: 700,
-            border: 'none',
-            cursor: 'pointer',
-          }}
+          className="l8-styled-node"
         >
           Transition to HALF_OPEN Probe
         </button>
         <button
           type="button"
           onClick={succeedProbe}
-          style={{
-            padding: '0.65rem 1.1rem',
-            borderRadius: '10px',
-            background: '#10b981',
-            color: '#090d16',
-            fontWeight: 700,
-            border: 'none',
-            cursor: 'pointer',
-          }}
+          className="l8-styled-node"
         >
           Probe 200 OK (Close Circuit)
         </button>
@@ -767,6 +718,7 @@ export async function upsertLocalizedArticleAction(
 """,
         "component_name": "GlobalI18nCms",
         "component_ts": """'use client';
+import './styles.css';
 
 import React, { useState } from 'react';
 
@@ -799,30 +751,16 @@ export function GlobalI18nCms(): React.JSX.Element {
       aria-label="Global i18n, BiDi RTL Layout & ICU CMS"
       dir={active.dir}
       data-testid="bidi-container"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-      }}
+      className="l8-styled-node"
     >
-      <div style={{ display: 'flex', gap: '0.6rem', marginBottom: '1.25rem' }}>
+      <div className="l8-styled-node">
         {(['en-US', 'ar-SA', 'ja-JP'] as const).map((loc) => (
           <button
             key={loc}
             type="button"
             aria-pressed={locale === loc}
             onClick={() => setLocale(loc)}
-            style={{
-              padding: '0.5rem 0.9rem',
-              borderRadius: '8px',
-              background: locale === loc ? '#38bdf8' : '#1e293b',
-              color: locale === loc ? '#090d16' : '#f8fafc',
-              fontWeight: 700,
-              border: 'none',
-              cursor: 'pointer',
-            }}
+            className="l8-styled-node"
           >
             {loc}
           </button>
@@ -830,18 +768,12 @@ export function GlobalI18nCms(): React.JSX.Element {
       </div>
 
       <article
-        style={{
-          borderInlineStart: '4px solid #38bdf8',
-          paddingInlineStart: '1.25rem',
-          background: 'rgba(15, 23, 42, 0.7)',
-          paddingBlock: '1rem',
-          borderRadius: '10px',
-        }}
+        className="l8-styled-node"
       >
-        <h2 data-testid="localized-headline" style={{ margin: '0 0 0.4rem', fontSize: '1.5rem', fontWeight: 800 }}>
+        <h2 data-testid="localized-headline" className="l8-styled-node">
           {active.headline}
         </h2>
-        <p style={{ margin: 0, color: '#4ade80', fontWeight: 600 }}>
+        <p className="l8-styled-node">
           {active.regionCount} • Direction: {active.dir.toUpperCase()}
         </p>
       </article>
@@ -1027,6 +959,7 @@ export async function indexSearchDocumentAction(
 """,
         "component_name": "Bm25SearchEngine",
         "component_ts": """'use client';
+import './styles.css';
 
 import React, { useState } from 'react';
 import { computeBm25Score } from './actions';
@@ -1055,61 +988,40 @@ export function Bm25SearchEngine(): React.JSX.Element {
   return (
     <section
       aria-label="BM25 Probabilistic Search & Disjunctive Faceted Engine"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-      }}
+      className="l8-styled-node"
     >
-      <span style={{ color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700 }}>
+      <span className="l8-styled-node">
         OKAPI BM25 PROBABILISTIC RANKING (k1=1.5, b=0.75) • DISJUNCTIVE FACETS
       </span>
-      <h2 style={{ margin: '0.35rem 0 1rem', fontSize: '1.45rem', fontWeight: 800 }}>
-        Matched Documents: <span data-testid="doc-count" style={{ color: '#4ade80' }}>{filtered.length}</span>
+      <h2 className="l8-styled-node">
+        Matched Documents: <span data-testid="doc-count" className="l8-styled-node">{filtered.length}</span>
       </h2>
 
-      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.25rem' }}>
+      <div className="l8-styled-node">
         {(['ALL', 'Database', 'WebGL', 'Security'] as const).map((dom) => (
           <button
             key={dom}
             type="button"
             aria-pressed={facet === dom}
             onClick={() => setFacet(dom)}
-            style={{
-              padding: '0.45rem 0.9rem',
-              borderRadius: '8px',
-              background: facet === dom ? '#38bdf8' : '#1e293b',
-              color: facet === dom ? '#090d16' : '#f8fafc',
-              fontWeight: 700,
-              border: 'none',
-              cursor: 'pointer',
-            }}
+            className="l8-styled-node"
           >
             {dom}
           </button>
         ))}
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+      <div className="l8-styled-node">
         {filtered.map((doc) => (
           <article
             key={doc.slug}
-            style={{
-              padding: '0.9rem 1.1rem',
-              borderRadius: '10px',
-              background: 'rgba(15, 23, 42, 0.75)',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}
+            className="l8-styled-node"
           >
             <div>
-              <div style={{ fontWeight: 700 }}>{doc.title}</div>
-              <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>Facet: {doc.domain}</div>
+              <div className="l8-styled-node">{doc.title}</div>
+              <div className="l8-styled-node">Facet: {doc.domain}</div>
             </div>
-            <code style={{ color: '#4ade80', fontWeight: 700 }}>BM25: {doc.bm25}</code>
+            <code className="l8-styled-node">BM25: {doc.bm25}</code>
           </article>
         ))}
       </div>
@@ -1284,6 +1196,7 @@ export async function triggerRegionalChaosFailoverAction(
 """,
         "component_name": "GlobeChaosControlPlane",
         "component_ts": """'use client';
+import './styles.css';
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
@@ -1352,58 +1265,32 @@ export function GlobeChaosControlPlane(): React.JSX.Element {
   return (
     <section
       aria-label="3D Global Edge Mesh & Chaos Engineering Control Plane"
-      style={{
-        padding: '2rem',
-        background: '#090d16',
-        color: '#f8fafc',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-        gap: '1.5rem',
-      }}
+      className="l8-styled-node"
     >
       <div>
-        <span style={{ color: '#38bdf8', fontSize: '0.75rem', fontWeight: 700 }}>
+        <span className="l8-styled-node">
           THREE.JS 3D GLOBAL MESH • AUTOMATED ANYCAST BGP FAILOVER
         </span>
-        <h2 style={{ margin: '0.35rem 0 1rem', fontSize: '1.45rem', fontWeight: 800 }}>
-          Global SLA: <span style={{ color: '#4ade80' }}>99.999% (5-Nines)</span>
+        <h2 className="l8-styled-node">
+          Global SLA: <span className="l8-styled-node">99.999% (5-Nines)</span>
         </h2>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+        <div className="l8-styled-node">
           {regions.map((r) => (
             <div
               key={r.code}
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '0.75rem 1rem',
-                borderRadius: '10px',
-                background: 'rgba(15, 23, 42, 0.75)',
-                border: r.healthy ? '1px solid rgba(74, 222, 128, 0.3)' : '1px solid #f43f5e',
-              }}
+              className="l8-styled-node"
             >
               <div>
                 <strong>{r.code}</strong> •{' '}
-                <span data-testid={`load-${r.code}`} style={{ color: r.healthy ? '#4ade80' : '#f87171' }}>
+                <span data-testid={`load-${r.code}`} className="l8-styled-node">
                   {r.trafficPct}% Load
                 </span>
               </div>
               <button
                 type="button"
                 onClick={() => partitionRegion(r.code)}
-                style={{
-                  padding: '0.4rem 0.75rem',
-                  borderRadius: '6px',
-                  background: '#f43f5e',
-                  color: '#f8fafc',
-                  fontWeight: 700,
-                  border: 'none',
-                  cursor: 'pointer',
-                  fontSize: '0.75rem',
-                }}
+                className="l8-styled-node"
               >
                 Inject BGP Partition ({r.code})
               </button>
@@ -1412,7 +1299,7 @@ export function GlobeChaosControlPlane(): React.JSX.Element {
         </div>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', background: '#0f172a', borderRadius: '14px', padding: '1rem' }}>
+      <div className="l8-styled-node">
         <canvas ref={canvasRef} width={320} height={220} aria-label="3D Global Edge Mesh Canvas" />
       </div>
     </section>
